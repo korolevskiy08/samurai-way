@@ -1,0 +1,23 @@
+.content{
+    grid-area: c;
+    background-color: #edeef0;
+}
+
+.avatar{
+    width: 180px;
+    height: 180px;
+    padding: 10px 0 0 10px;
+}
+
+.space{
+    height: 5px;
+    background-color: white;
+}
+
+.descriptionProfile{
+    display: flex;
+}
+
+.profileInfo{
+    padding-left: 40px;
+}

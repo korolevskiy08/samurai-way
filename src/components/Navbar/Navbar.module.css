@@ -1,0 +1,22 @@
+.nav{
+    grid-area: n;
+    background-color: #edeef0;
+    margin-right: 5px;
+}
+.item{
+    color: black;
+    padding: 5px 5px 5px 5px;
+}
+
+.item:hover{
+    background-color: #818c99;
+}
+
+.active {
+    background-color: #818c99;
+}
+
+.myPhotos{
+    margin-top: 10px;
+    width: 900px;
+}
