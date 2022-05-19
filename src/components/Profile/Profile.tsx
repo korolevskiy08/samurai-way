@@ -6,7 +6,7 @@ import MyPhotos from "./MyPhotos/MyPhotos";
 
 const Profile = () => {
     return (
-        <div className={c.content}>
+        <div>
             <div className={c.descriptionProfile}>
                 <div>
                     <img className={c.avatar}

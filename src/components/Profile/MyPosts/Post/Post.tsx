@@ -1,16 +1,26 @@
 import React from "react";
 import c from'./Post.module.css';
 
-let Post = () => {
+type Message = {
+    message?: string;
+    like?: number;
+}
+
+let Post = (props: Message) => {
+    debugger
     return(
-        <div>
+        <div className={c.post}>
             <div className={c.posts}>
                 <div className={c.item}>
-                    post 1
+                    <img src='https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c8/c804f2b2218dfa312287077102c6077bb0abe45f_full.jpg'/>
+                    <div className={c.textPost}>
+                        <p>{props.message}</p>
+                        <div>
+                            <span>Like {props.like}</span>
+                        </div>
+                    </div>
                 </div>
-                <div className={c.item}>
-                    post 2
-                </div>
+                <div className={c.space}></div>
             </div>
         </div>
     )
