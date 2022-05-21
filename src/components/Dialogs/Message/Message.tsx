@@ -2,7 +2,8 @@ import React from "react";
 import c from'./Message.module.css';
 
 type MessagePropsType = {
-    text: string
+    text: string,
+    id: number
 }
 
 const Message = (props: MessagePropsType) => {

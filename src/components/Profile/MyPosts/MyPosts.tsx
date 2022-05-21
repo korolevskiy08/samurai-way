@@ -3,6 +3,14 @@ import c from './MyPosts.module.css';
 import Post from "./Post/Post";
 
 
+let postData = [
+    {id: 1, message: 'Hi, how are you?', like: 6},
+    {id: 2, message: 'My first post', like: 7},
+    {id: 3, message: 'Hello, my friend', like: 99}
+]
+
+let postElements = postData.map(el => <Post message={el.message} like={el.like} />)
+
 let MyPosts = () => {
     return (
         <div>
@@ -20,9 +28,7 @@ let MyPosts = () => {
             <div className={c.newPost}>
                 New post
             </div>
-            <Post message='Hi, how are you?' like={6}/>
-            <Post message='My first post' like={7}/>
-            <Post message='Hello, my friend' like={99}/>
+            {postElements}
         </div>
     )
 }
