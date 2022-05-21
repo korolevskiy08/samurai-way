@@ -12,7 +12,7 @@ let Post = (props: Message) => {
         <div className={c.post}>
             <div className={c.posts}>
                 <div className={c.item}>
-                    <img src='https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c8/c804f2b2218dfa312287077102c6077bb0abe45f_full.jpg'/>
+                    <img alt='avatar' src='https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c8/c804f2b2218dfa312287077102c6077bb0abe45f_full.jpg'/>
                     <div className={c.textPost}>
                         <p>{props.message}</p>
                         <div>

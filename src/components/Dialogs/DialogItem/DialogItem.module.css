@@ -1,0 +1,7 @@
+.dialog{
+    padding-bottom: 10px;
+}
+
+.dialogsItems .active {
+    color: cornflowerblue;
+}

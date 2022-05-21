@@ -1,0 +1,13 @@
+.avatar{
+    width: 180px;
+    height: 180px;
+    padding: 10px 0 0 10px;
+}
+
+.descriptionProfile{
+    display: flex;
+}
+
+.profileInfo{
+    padding-left: 40px;
+}

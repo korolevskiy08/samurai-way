@@ -10,15 +10,19 @@ let MyPosts = () => {
                 My posts
             </div>
             <div className={c.newPost}>
-                <textarea className={c.inputText}></textarea>
-                <button>Add post</button>
+                <div>
+                    <textarea className={c.inputText}></textarea>
+                </div>
+                <div>
+                    <button>Add post</button>
+                </div>
             </div>
             <div className={c.newPost}>
                 New post
             </div>
-            <Post message='Hi, how are you?' like= {6}/>
+            <Post message='Hi, how are you?' like={6}/>
             <Post message='My first post' like={7}/>
-            <Post message='Hello, my friend' like={99} />
+            <Post message='Hello, my friend' like={99}/>
         </div>
     )
 }
