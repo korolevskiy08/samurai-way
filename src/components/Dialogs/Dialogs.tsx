@@ -22,7 +22,7 @@ let Dialogs = (props: any) => {
     return (
         <div className={c.dialogs}>
             <div className={c.dialogsItems}>
-                {dialogsElement}
+                {dialogsElement} 
             </div>
             <div className={c.messages}>
                 {messagesElement}
