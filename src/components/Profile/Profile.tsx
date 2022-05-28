@@ -5,14 +5,25 @@ import Post from "./MyPosts/Post/Post";
 import MyPhotos from "./MyPhotos/MyPhotos";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = () => {
+type PostDataType = {
+    id: number
+    message: string
+    like: number
+}
+
+type ProfilePageType = {
+    postData: Array<PostDataType>
+}
+
+const Profile = (props: ProfilePageType) => {
+
     return (
         <div>
-            <ProfileInfo />
+            <ProfileInfo/>
             <div className={c.space}></div>
             <MyPhotos/>
             <div className={c.space}></div>
-            <MyPosts/>
+            <MyPosts postData={props.postData}/>
             <Post/>
         </div>
     )

@@ -2,16 +2,19 @@ import React from "react";
 import c from './MyPosts.module.css';
 import Post from "./Post/Post";
 
+type PostDataType = {
+    id: number
+    message: string
+    like: number
+}
+type ProfilePageType = {
+    postData: Array<PostDataType>
+}
 
-let postData = [
-    {id: 1, message: 'Hi, how are you?', like: 6},
-    {id: 2, message: 'My first post', like: 7},
-    {id: 3, message: 'Hello, my friend', like: 99}
-]
+let MyPosts = (props: ProfilePageType) => {
 
-let postElements = postData.map(el => <Post message={el.message} like={el.like} />)
+    let postElements = props.postData.map((el: any) => <Post message={el.message} like={el.like}/>)
 
-let MyPosts = () => {
     return (
         <div>
             <div className={c.myPosts}>
