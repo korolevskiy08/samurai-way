@@ -23,9 +23,20 @@ type DialogPageType = {
     messagesData: Array<MessagesDataType>
 }
 
+type FriendsType = {
+    id: number
+    name: string
+    status: string
+}
+
+type SideBarType = {
+    friends: Array<FriendsType>
+}
+
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogPage: DialogPageType
+    sideBar: SideBarType
 }
 
 export let state:RootStateType = {
@@ -48,4 +59,11 @@ export let state:RootStateType = {
             {id: 3, message: 'By'}
         ]
     },
+    sideBar: {
+        friends: [
+            {id: 1, name: 'Marusia', status: 'online'},
+            {id: 2, name: 'Pablo', status: 'offline'},
+            {id: 3, name: 'Alex', status: 'offline'}
+        ]
+    }
 }

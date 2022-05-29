@@ -4,7 +4,6 @@ import {NavLink} from 'react-router-dom';
 
 const renderIsActive = ((navData: any) => navData.isActive ? c.active : c.item)
 
-
 const Navbar = (props: any) => {
     return (
         <nav className={c.nav}>
@@ -13,6 +12,9 @@ const Navbar = (props: any) => {
             </div>
             <div className={c.item}>
                 <NavLink to='/Dialogs' className={renderIsActive}> Messages </NavLink>
+            </div>
+            <div className = {`${c.item}`}>
+                <NavLink to='/Friends' className={ renderIsActive }> Friends </NavLink>
             </div>
             <div className={`${c.item}`}>
                 <NavLink to='/News' className={renderIsActive}> News </NavLink>

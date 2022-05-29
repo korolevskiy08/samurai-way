@@ -7,7 +7,6 @@ type Message = {
 }
 
 let Post = (props: Message) => {
-    debugger
     return(
         <div className={c.post}>
             <div className={c.posts}>

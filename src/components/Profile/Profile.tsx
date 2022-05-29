@@ -10,7 +10,6 @@ type PostDataType = {
     message: string
     like: number
 }
-
 type ProfilePageType = {
     postData: Array<PostDataType>
 }

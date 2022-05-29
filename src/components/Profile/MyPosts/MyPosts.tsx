@@ -13,7 +13,7 @@ type ProfilePageType = {
 
 let MyPosts = (props: ProfilePageType) => {
 
-    let postElements = props.postData.map((el: any) => <Post message={el.message} like={el.like}/>)
+    let postElements = props.postData.map((el, i) => <Post key={i} message={el.message} like={el.like}/>)
 
     return (
         <div>
