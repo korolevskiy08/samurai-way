@@ -9,9 +9,11 @@ type PostDataType = {
     id: number
     message: string
     like: number
+
 }
 type ProfilePageType = {
     postData: Array<PostDataType>
+    addPost: (postMessage: string)=>void
 }
 
 const Profile = (props: ProfilePageType) => {
@@ -22,7 +24,7 @@ const Profile = (props: ProfilePageType) => {
             <div className={c.space}></div>
             <MyPhotos/>
             <div className={c.space}></div>
-            <MyPosts postData={props.postData}/>
+            <MyPosts postData={props.postData} addPost={props.addPost}/>
             <Post/>
         </div>
     )

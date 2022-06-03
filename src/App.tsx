@@ -13,11 +13,11 @@ import Friends from "./components/Friends/Friends";
 
 type PropsType = { // !!!!!!!!!!!
     state: RootStateType
+    addPost: (postMessage: string)=>void
 }
 
 const App = (props: PropsType) => {
 // const App = ({ state }: {state: RootStateType}) => {
-    console.log(props.state.sideBar.friends)
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -28,7 +28,8 @@ const App = (props: PropsType) => {
                            render={() => <Dialogs
                                dialogsData={props.state.dialogPage.dialogsData}
                                messagesData={props.state.dialogPage.messagesData}/>}/>
-                    <Route path='/profile' render={() => <Profile postData={props.state.profilePage.postData}/>}/>
+                    <Route path='/profile' render={() => <Profile postData={props.state.profilePage.postData}
+                                                                  addPost={props.addPost}/>}/>
                     <Route path='/Friends' render={() => <Friends friends={props.state.sideBar.friends}/>}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/music' component={() => <Music/>}/>

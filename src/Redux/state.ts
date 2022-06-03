@@ -1,3 +1,5 @@
+import profile from "../components/Profile/Profile";
+
 type PostDataType = {
     id: number
     message: string
@@ -39,6 +41,8 @@ export type RootStateType = {
     sideBar: SideBarType
 }
 
+
+
 export let state:RootStateType = {
     profilePage: {
         postData: [
@@ -66,4 +70,15 @@ export let state:RootStateType = {
             {id: 3, name: 'Alex', status: 'offline'}
         ]
     }
+}
+
+
+export let addPost = (postMessage: string) => {
+    debugger
+    let newPost = {
+        id: state.profilePage.postData.length + 1,
+        message: postMessage,
+        like: 0
+    }
+    state.profilePage.postData.push(newPost)
 }

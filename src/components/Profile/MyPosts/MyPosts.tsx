@@ -1,6 +1,7 @@
-import React from "react";
+import React, {ChangeEvent, useState} from "react";
 import c from './MyPosts.module.css';
 import Post from "./Post/Post";
+import {Button} from "../../Button/Button";
 
 type PostDataType = {
     id: number
@@ -9,11 +10,23 @@ type PostDataType = {
 }
 type ProfilePageType = {
     postData: Array<PostDataType>
+    addPost: (postMessage: string) => void
 }
 
 let MyPosts = (props: ProfilePageType) => {
 
     let postElements = props.postData.map((el, i) => <Post key={i} message={el.message} like={el.like}/>)
+
+    const [value, setValue] = useState("")
+
+    const onChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setValue(event.currentTarget.value)
+    }
+
+    const addPostHandler = () => {
+        props.addPost(value)
+        console.log(value)
+    }
 
     return (
         <div>
@@ -22,10 +35,10 @@ let MyPosts = (props: ProfilePageType) => {
             </div>
             <div className={c.newPost}>
                 <div>
-                    <textarea className={c.inputText}></textarea>
+                    <textarea value={value} onChange={onChange} className={c.inputText}></textarea>
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <Button name={'Add Post'} callBack={addPostHandler}/>
                 </div>
             </div>
             <div className={c.newPost}>
