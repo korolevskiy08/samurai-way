@@ -25,6 +25,7 @@ let MyPosts = (props: ProfilePageType) => {
 
     const addPostHandler = () => {
         props.addPost(value)
+        setValue('')
         console.log(value)
     }
 

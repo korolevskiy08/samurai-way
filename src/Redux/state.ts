@@ -1,4 +1,6 @@
 import profile from "../components/Profile/Profile";
+import {rerenderEntireTree} from "../render";
+
 
 type PostDataType = {
     id: number
@@ -81,4 +83,5 @@ export let addPost = (postMessage: string) => {
         like: 0
     }
     state.profilePage.postData.push(newPost)
+    rerenderEntireTree(state)
 }
