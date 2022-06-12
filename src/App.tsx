@@ -14,6 +14,7 @@ import Friends from "./components/Friends/Friends";
 type PropsType = { // !!!!!!!!!!!
     state: RootStateType
     addPost: (postMessage: string)=>void
+    addNewMessage: (dialogMessage: string) => void
 }
 
 const App = (props: PropsType) => {
@@ -27,7 +28,9 @@ const App = (props: PropsType) => {
                     <Route path='/dialogs'
                            render={() => <Dialogs
                                dialogsData={props.state.dialogPage.dialogsData}
-                               messagesData={props.state.dialogPage.messagesData}/>}/>
+                               messagesData={props.state.dialogPage.messagesData}
+                               addNewMessage={props.addNewMessage}
+                           />}/>
                     <Route path='/profile' render={() => <Profile postData={props.state.profilePage.postData}
                                                                   addPost={props.addPost}/>}/>
                     <Route path='/Friends' render={() => <Friends friends={props.state.sideBar.friends}/>}/>

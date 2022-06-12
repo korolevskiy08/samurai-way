@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useState, KeyboardEvent} from "react";
 import c from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {Button} from "../../Button/Button";
@@ -17,9 +17,9 @@ let MyPosts = (props: ProfilePageType) => {
 
     let postElements = props.postData.map((el, i) => <Post key={i} message={el.message} like={el.like}/>)
 
-    const [value, setValue] = useState("")
+    const [value, setValue] = useState("it-kamasutra")
 
-    const onChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const onChange = (event: ChangeEvent<HTMLInputElement>) => {
         setValue(event.currentTarget.value)
     }
 
@@ -29,6 +29,12 @@ let MyPosts = (props: ProfilePageType) => {
         console.log(value)
     }
 
+    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.ctrlKey && event.code === 'Enter') {
+            addPostHandler()
+        }
+    }
+
     return (
         <div>
             <div className={c.myPosts}>
@@ -36,7 +42,10 @@ let MyPosts = (props: ProfilePageType) => {
             </div>
             <div className={c.newPost}>
                 <div>
-                    <textarea value={value} onChange={onChange} className={c.inputText}></textarea>
+                    <input value={value}
+                           onChange={onChange}
+                           onKeyPress={onKeyPressHandler}
+                           className={c.inputText}/>
                 </div>
                 <div>
                     <Button name={'Add Post'} callBack={addPostHandler}/>

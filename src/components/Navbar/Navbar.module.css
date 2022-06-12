@@ -6,11 +6,11 @@
 .item{
     color: black;
     padding: 5px 5px 5px 5px;
-    text-decoration: none;
 }
 
 .item a {
     text-decoration: none;
+
 }
 
 .item:hover{
@@ -18,7 +18,7 @@
 }
 
 .active {
-    background-color: #818c99;
+    color: black;
 }
 
 .myPhotos{

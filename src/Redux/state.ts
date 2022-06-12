@@ -1,7 +1,4 @@
 import profile from "../components/Profile/Profile";
-import {rerenderEntireTree} from "../render";
-
-
 type PostDataType = {
     id: number
     message: string
@@ -23,7 +20,7 @@ type ProfilePageType = {
 }
 
 type DialogPageType = {
-    dialogsData:Array<DialogsDataType>
+    dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
 }
 
@@ -43,9 +40,11 @@ export type RootStateType = {
     sideBar: SideBarType
 }
 
+let rerenderEntireTree = () => {
+console.log('state changed')
+}
 
-
-export let state:RootStateType = {
+export let state: RootStateType = {
     profilePage: {
         postData: [
             {id: 1, message: 'Hi, how are you?', like: 6},
@@ -74,14 +73,26 @@ export let state:RootStateType = {
     }
 }
 
-
 export let addPost = (postMessage: string) => {
-    debugger
     let newPost = {
         id: state.profilePage.postData.length + 1,
         message: postMessage,
         like: 0
     }
     state.profilePage.postData.push(newPost)
-    rerenderEntireTree(state)
+    rerenderEntireTree()
+}
+
+export let addNewMessage = (dialogMessage: string) => {
+    let newMessage = {
+        id: 1,
+        message: dialogMessage
+    }
+    state.dialogPage.messagesData.push(newMessage)
+    rerenderEntireTree()
+    console.log(dialogMessage)
+}
+
+export const subscribe = (observer: any) => {
+    rerenderEntireTree = observer
 }
