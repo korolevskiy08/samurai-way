@@ -8,38 +8,40 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Setting from "./components/Settings/Setting";
-import {RootStateType} from "./Redux/state";
+import {addMessageActionCreatorType, addPostActionCreatorType, StoreType} from "./Redux/state";
 import Friends from "./components/Friends/Friends";
 
 type PropsType = { // !!!!!!!!!!!
-    state: RootStateType
-    addPost: (postMessage: string)=>void
-    addNewMessage: (dialogMessage: string) => void
+    store: StoreType
+    dispatch: (action: addPostActionCreatorType | addMessageActionCreatorType) => void
 }
 
-const App = (props: PropsType) => {
-// const App = ({ state }: {state: RootStateType}) => {
+
+const App:React.FC<PropsType> = (props) =>{
+const state = props.store.getState()
+
     return (
         <BrowserRouter>
+
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs'
                            render={() => <Dialogs
-                               dialogsData={props.state.dialogPage.dialogsData}
-                               messagesData={props.state.dialogPage.messagesData}
-                               addNewMessage={props.addNewMessage}
+                               dialogsData={props.store._state.dialogPage.dialogsData}
+                               messagesData={props.store._state.dialogPage.messagesData}
+                               dispatch={props.store.dispatch.bind(props.store)}
                            />}/>
-                    <Route path='/profile' render={() => <Profile postData={props.state.profilePage.postData}
-                                                                  addPost={props.addPost}/>}/>
-                    <Route path='/Friends' render={() => <Friends friends={props.state.sideBar.friends}/>}/>
+                    <Route path='/profile' render={() => <Profile postData={props.store._state.profilePage.postData}
+                                                                  dispatch={props.store.dispatch.bind(props.store)}/>}/>
+                    <Route path='/Friends' render={() => <Friends friends={props.store._state.sideBar.friends}/>}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/music' component={() => <Music/>}/>
                     <Route path='/setting' component={() => <Setting/>}/>
                 </div>
             </div>
-        </BrowserRouter>
+            </BrowserRouter>
     );
 }
 

@@ -7,12 +7,12 @@ import App from './App';
 
 let rerenderEntireTree = () => {
 
-    ReactDOM.render(
-        <App state={store.getState()} addPost={store.addPost.bind(store)} addNewMessage={store.addNewMessage.bind(store)}/>,
+ReactDOM.render(
+        <App store={store} dispatch={store.dispatch.bind(store)}/>,
         document.getElementById('root')
     );
-
 }
+
 rerenderEntireTree()
 
 store.subscribe(rerenderEntireTree)

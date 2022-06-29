@@ -3,6 +3,7 @@ import c from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Button} from "../Button/Button";
+import { addMessageActionCreator, addMessageActionCreatorType, addPostActionCreatorType } from '../../Redux/state';
 
 type DialogsDataType = {
     id: number
@@ -15,7 +16,7 @@ type MessagesDataType = {
 type DialogPageType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
-    addNewMessage: (dialogMessage: string) => void
+    dispatch: (value: any) => void
 }
 
 let Dialogs = (props: DialogPageType) => {
@@ -29,10 +30,13 @@ let Dialogs = (props: DialogPageType) => {
         let textMessage = event.currentTarget.value
         setDialogMessage(textMessage)
         console.log(textMessage)
+
     }
 
     const addMessage = () => {
-        props.addNewMessage(dialogMessage)
+        // props.dispatch({type: 'ADD-NEW-MESSAGE', dialogMessage: dialogMessage})  
+        let action = addMessageActionCreator(dialogMessage)
+        props.dispatch(action)
         setDialogMessage('')
     }
 
