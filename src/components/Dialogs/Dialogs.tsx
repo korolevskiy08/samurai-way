@@ -3,7 +3,7 @@ import c from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Button} from "../Button/Button";
-import { addMessageActionCreator, addMessageActionCreatorType, addPostActionCreatorType } from '../../Redux/state';
+import { addMessageActionCreator} from '../../Redux/dialog-reducer';
 
 type DialogsDataType = {
     id: number

@@ -1,3 +1,6 @@
+import profileReducer, {addPostActionCreator} from "./profile-reducer";
+import dialogReducer, {addMessageActionCreator} from "./dialog-reducer";
+import sideBarReducer from "./sideBar-reducer";
 
 type PostDataType = {
     id: number
@@ -12,10 +15,10 @@ type MessagesDataType = {
     id: number
     message: string
 }
-type ProfilePageType = {
+export type ProfilePageType = {
     postData: Array<PostDataType>
 }
-type DialogPageType = {
+export type DialogPageType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
 }
@@ -24,7 +27,7 @@ type FriendsType = {
     name: string
     status: string
 }
-type SideBarType = {
+export type SideBarType = {
     friends: Array<FriendsType>
 }
 export type RootStateType = {
@@ -32,20 +35,13 @@ export type RootStateType = {
     dialogPage: DialogPageType
     sideBar: SideBarType
 }
-export type addPostActionCreatorType = {
-    type: 'ADD_POST',
-    postMessage: string
-}
-export type addMessageActionCreatorType =  {
-    type: 'ADD_NEW_MESSAGE',
-    dialogMessage: string
-}
+export type ActionsType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof addMessageActionCreator>
 export type StoreType = {
     _state: RootStateType
     _callSubscriber: () => void
     getState: () => void
     subscribe: (callback: () => void) => void
-    dispatch: (action: addPostActionCreatorType | addMessageActionCreatorType) => void
+    dispatch: (action: ActionsType) => void
 } // типизация всего стора
 
 export let store: StoreType = {
@@ -86,53 +82,16 @@ export let store: StoreType = {
     subscribe(callback: () => void) {
         this._callSubscriber = callback
     },
-    // addNewMessage(dialogMessage: string){
-    //     let newMessage = {
-    //         id: 1,
-    //         message: dialogMessage
-    //     }
-    //     this._state.dialogPage.messagesData.push(newMessage)
-    //     this._callSubscriber()
-    //     console.log(dialogMessage)
-    // },
-    // addPost(postMessage: string){
-    //     let newPost = {
-    //         id: 0,
-    //         message: postMessage,
-    //         like: 0
-    //     }
-    //     this._state.profilePage.postData.push(newPost)
-    //     this._callSubscriber()
-    // },
     dispatch(action) {
-        if (action.type === 'ADD_POST') {
-            let newPost = {
-                id: 0,
-                message: action.postMessage,
-                like: 0
-            }
-            
-            this._state.profilePage.postData.push(newPost)
-            this._callSubscriber()
-            console.log(newPost)
-        }
-        if (action.type === 'ADD_NEW_MESSAGE') {
-            let newMessage = {
-                id: 1,
-                message: action.dialogMessage
-            }
-            this._state.dialogPage.messagesData.push(newMessage)
-            this._callSubscriber()
-        }
-    }
-}
-export const addPostActionCreator = (value: string) => {
-    return {
-        type: 'ADD_POST', postMessage: value 
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogPage = dialogReducer(this._state.dialogPage, action)
+        this._state.sideBar = sideBarReducer(this._state.sideBar, action)
+
+       this._callSubscriber()
     }
 }
 
-export const addMessageActionCreator = (dialogMessage: string) => {
-    return {type: 'ADD_NEW_MESSAGE', dialogMessage: dialogMessage}
-}
+
+
 

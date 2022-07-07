@@ -8,8 +8,12 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Setting from "./components/Settings/Setting";
-import {addMessageActionCreatorType, addPostActionCreatorType, StoreType} from "./Redux/state";
+
+
 import Friends from "./components/Friends/Friends";
+import {addPostActionCreatorType} from "./Redux/profile-reducer";
+import {addMessageActionCreatorType} from "./Redux/dialog-reducer";
+import {StoreType} from "./Redux/state";
 
 type PropsType = { // !!!!!!!!!!!
     store: StoreType
@@ -18,7 +22,6 @@ type PropsType = { // !!!!!!!!!!!
 
 
 const App:React.FC<PropsType> = (props) =>{
-const state = props.store.getState()
 
     return (
         <BrowserRouter>

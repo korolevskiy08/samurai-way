@@ -4,7 +4,8 @@ import MyPosts from "./MyPosts/MyPosts";
 import Post from "./MyPosts/Post/Post";
 import MyPhotos from "./MyPhotos/MyPhotos";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import { addMessageActionCreatorType, addPostActionCreatorType } from "../../Redux/state";
+import {addPostActionCreatorType} from "../../Redux/profile-reducer";
+
 
 type PostDataType = {
     id: number
@@ -14,7 +15,7 @@ type PostDataType = {
 }
 type ProfilePageType = {
     postData: Array<PostDataType>
-    dispatch: (action: addPostActionCreatorType | addMessageActionCreatorType) => void
+    dispatch: (action: addPostActionCreatorType) => void
 }
 
 const Profile = (props: ProfilePageType) => {

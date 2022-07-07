@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState, KeyboardEvent } from "react";
 import c from './MyPosts.module.css';
 import Post from "./Post/Post";
 import { Button } from "../../Button/Button";
-import { addMessageActionCreatorType, addPostActionCreator, addPostActionCreatorType } from "../../../Redux/state";
+import { addPostActionCreator, addPostActionCreatorType } from "../../../Redux/profile-reducer";
 
 type PostDataType = {
     id: number
