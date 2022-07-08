@@ -2,22 +2,25 @@ import profileReducer, {addPostActionCreator} from "./profile-reducer";
 import dialogReducer, {addMessageActionCreator} from "./dialog-reducer";
 import sideBarReducer from "./sideBar-reducer";
 
+
 type PostDataType = {
     id: number
     message: string
     like: number
 }
-type DialogsDataType = {
-    id: number
-    name: string
-}
 type MessagesDataType = {
     id: number
     message: string
 }
+
+type DialogsDataType = {
+    id: number
+    name: string
+}
 export type ProfilePageType = {
     postData: Array<PostDataType>
 }
+
 export type DialogPageType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
@@ -35,7 +38,7 @@ export type RootStateType = {
     dialogPage: DialogPageType
     sideBar: SideBarType
 }
-export type ActionsType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof addMessageActionCreator>
+
 export type StoreType = {
     _state: RootStateType
     _callSubscriber: () => void
@@ -43,7 +46,7 @@ export type StoreType = {
     subscribe: (callback: () => void) => void
     dispatch: (action: ActionsType) => void
 } // типизация всего стора
-
+export type ActionsType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof addMessageActionCreator>
 export let store: StoreType = {
     _state: {
         profilePage: {

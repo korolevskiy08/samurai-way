@@ -9,19 +9,18 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Setting from "./components/Settings/Setting";
 
-
 import Friends from "./components/Friends/Friends";
 import {addPostActionCreatorType} from "./Redux/profile-reducer";
 import {addMessageActionCreatorType} from "./Redux/dialog-reducer";
-import {StoreType} from "./Redux/state";
 
 type PropsType = { // !!!!!!!!!!!
-    store: StoreType
+    store: any
     dispatch: (action: addPostActionCreatorType | addMessageActionCreatorType) => void
 }
 
-
 const App:React.FC<PropsType> = (props) =>{
+    console.log(props)
+    let state = props.store.getState()
 
     return (
         <BrowserRouter>
@@ -32,13 +31,13 @@ const App:React.FC<PropsType> = (props) =>{
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs'
                            render={() => <Dialogs
-                               dialogsData={props.store._state.dialogPage.dialogsData}
-                               messagesData={props.store._state.dialogPage.messagesData}
-                               dispatch={props.store.dispatch.bind(props.store)}
+                               dialogsData={state.dialogPage.dialogsData}
+                               messagesData={state.dialogPage.messagesData}
+                               dispatch={props.dispatch.bind(props.store)}
                            />}/>
-                    <Route path='/profile' render={() => <Profile postData={props.store._state.profilePage.postData}
-                                                                  dispatch={props.store.dispatch.bind(props.store)}/>}/>
-                    <Route path='/Friends' render={() => <Friends friends={props.store._state.sideBar.friends}/>}/>
+                    <Route path='/profile' render={() => <Profile postData={state.profilePage.postData}
+                                                                  dispatch={props.dispatch.bind(props.store)}/>}/>
+                    <Route path='/Friends' render={() => <Friends friends={state.sideBar.friends}/>}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/music' component={() => <Music/>}/>
                     <Route path='/setting' component={() => <Setting/>}/>

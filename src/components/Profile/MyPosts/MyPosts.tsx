@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState, KeyboardEvent } from "react";
 import c from './MyPosts.module.css';
 import Post from "./Post/Post";
 import { Button } from "../../Button/Button";
-import { addPostActionCreator, addPostActionCreatorType } from "../../../Redux/profile-reducer";
+import { addPostActionCreator} from "../../../Redux/profile-reducer";
 
 type PostDataType = {
     id: number
@@ -13,8 +13,6 @@ type ProfilePageType = {
     postData: Array<PostDataType>
     dispatch: (value: any) => void
 }
-
-
 
 let MyPosts = (props: ProfilePageType) => {
 
