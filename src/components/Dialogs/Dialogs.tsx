@@ -1,50 +1,30 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 import c from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Button} from "../Button/Button";
-import { addMessageActionCreator} from '../../Redux/dialog-reducer';
+import {DialogsDataType, MessagesDataType} from '../../Redux/dialog-reducer';
 
-type DialogsDataType = {
-    id: number
-    name: string
-}
-type MessagesDataType = {
-    id: number
-    message: string
-}
 type DialogPageType = {
+    dialogMessage: string
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
-    dispatch: (value: any) => void
+    newMessageText: (event: ChangeEvent<HTMLInputElement>) => void
+    addMessage: () => void
+    onKeyPressHandler: (event: KeyboardEvent<HTMLInputElement>) => void
 }
 
-let Dialogs = (props: DialogPageType) => {
+let Dialogs = ({
+                   dialogsData,
+                   messagesData,
+                   newMessageText,
+                   addMessage,
+                   onKeyPressHandler,
+                   dialogMessage
+               }: DialogPageType) => {
 
-    let [dialogMessage, setDialogMessage] = useState('')
-
-    let dialogsElement = props.dialogsData.map((el, i) => <DialogItem key={i} name={el.name} id={el.id}/>)
-    let messagesElement = props.messagesData.map((el, i) => <Message key={i} text={el.message} id={el.id}/>)
-
-    const newMessageText = (event: ChangeEvent<HTMLInputElement>) => {
-        let textMessage = event.currentTarget.value
-        setDialogMessage(textMessage)
-        console.log(textMessage)
-
-    }
-
-    const addMessage = () => {
-        // props.dispatch({type: 'ADD-NEW-MESSAGE', dialogMessage: dialogMessage})  
-        let action = addMessageActionCreator(dialogMessage)
-        props.dispatch(action)
-        setDialogMessage('')
-    }
-
-    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if(event.ctrlKey && event.code === 'Enter'){
-            addMessage()
-        }
-    }
+    let dialogsElement = dialogsData.map((el, i) => <DialogItem key={i} name={el.name} id={el.id}/>)
+    let messagesElement = messagesData.map((el, i) => <Message key={i} text={el.message} id={el.id}/>)
 
     return (
         <div className={c.dialogs}>
@@ -58,7 +38,7 @@ let Dialogs = (props: DialogPageType) => {
                 <div>
                     <input onChange={newMessageText}
                            value={dialogMessage}
-                    onKeyPress={onKeyPressHandler}
+                           onKeyPress={onKeyPressHandler}
                     />
                 </div>
                 <div>

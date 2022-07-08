@@ -1,6 +1,6 @@
 import {ActionsType} from "./redux-store";
 
-type PostDataType = {
+export type PostDataType = {
     id: number
     message: string
     like: number

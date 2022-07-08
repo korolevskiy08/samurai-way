@@ -12,6 +12,7 @@ import Setting from "./components/Settings/Setting";
 import Friends from "./components/Friends/Friends";
 import {addPostActionCreatorType} from "./Redux/profile-reducer";
 import {addMessageActionCreatorType} from "./Redux/dialog-reducer";
+import DialogsContainer from "./components/Dialogs/Dialogs.container";
 
 type PropsType = { // !!!!!!!!!!!
     store: any
@@ -24,13 +25,12 @@ const App:React.FC<PropsType> = (props) =>{
 
     return (
         <BrowserRouter>
-
             <div className="app-wrapper">
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs'
-                           render={() => <Dialogs
+                           render={() => <DialogsContainer
                                dialogsData={state.dialogPage.dialogsData}
                                messagesData={state.dialogPage.messagesData}
                                dispatch={props.dispatch.bind(props.store)}

@@ -5,6 +5,7 @@ import Post from "./MyPosts/Post/Post";
 import MyPhotos from "./MyPhotos/MyPhotos";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {addPostActionCreatorType} from "../../Redux/profile-reducer";
+import MyPostsComponent from "./MyPosts/MyPosts.container";
 
 
 type PostDataType = {
@@ -26,7 +27,7 @@ const Profile = (props: ProfilePageType) => {
             <div className={c.space}></div>
             <MyPhotos/>
             <div className={c.space}></div>
-            <MyPosts postData={props.postData}
+            <MyPostsComponent postData={props.postData}
              dispatch={props.dispatch}/>
             <Post/>
         </div>
