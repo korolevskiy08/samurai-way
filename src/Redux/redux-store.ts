@@ -1,6 +1,6 @@
 import {combineReducers, createStore} from "redux";
 import profileReducer, {addPostActionCreator} from "./profile-reducer";
-import dialogReducer, {addMessageActionCreator, DialogPageType} from "./dialog-reducer";
+import dialogReducer, {addMessageActionCreator} from "./dialog-reducer";
 import sideBarReducer from "./sideBar-reducer";
 
 let reducers = combineReducers({
@@ -11,6 +11,7 @@ let reducers = combineReducers({
 
 let store = createStore(reducers)
 
+export type ReduxStoreType = typeof store
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 

@@ -4,13 +4,18 @@ import store from "./Redux/redux-store";
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import StoreContext from "./store.context";
 
 let rerenderEntireTree = () => {
 
 ReactDOM.render(
-        <App store={store} dispatch={store.dispatch.bind(store)}/>,
-        document.getElementById('root')
-    );
+    <StoreContext.Provider value={store}>
+        <App
+            // store={store} dispatch={store.dispatch.bind(store)}
+        />
+    </StoreContext.Provider>,
+    document.getElementById('root')
+);
 }
 
 rerenderEntireTree()

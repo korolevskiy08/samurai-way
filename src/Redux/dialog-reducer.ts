@@ -28,10 +28,6 @@ let initialState: DialogPageType = {
             { id: 3, message: 'By' }
         ]
 }
-type dialogReducer = {
-    state: DialogPageType,
-    action: ActionsType
-}
 
 export const dialogReducer = (state = initialState, action:ActionsType) => {
     switch (action.type) {

@@ -1,22 +1,24 @@
 import React from "react";
 import {FriendsItem} from "./FriendsItem/FriendsItem";
+import StoreContext from "../../store.context";
 
 
-type FriendsType = {
-    id: number
-    name: string
-    status: string
-}
-
-type SideBarType = {
-    friends: Array<FriendsType>
-}
-
-const Friends = (props: SideBarType) => {
-    let friends = props.friends.map((el, i) => <FriendsItem key={i} name={el.name} status={el.status}/>)
+const Friends = () => {
     return (
         <div>
-            {friends}
+            <StoreContext.Consumer>
+                {
+                (store) => {
+                    let friends = store.getState().sideBar.friends.map((el, i) => <FriendsItem key={i} name={el.name} status={el.status}/>)
+
+                    return (
+                        {friends}
+                    )
+                }
+            }
+
+            </StoreContext.Consumer>
+
         </div>
     )
 }
