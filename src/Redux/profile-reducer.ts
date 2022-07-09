@@ -8,10 +8,6 @@ export type PostDataType = {
 export type ProfilePageType = {
     postData: Array<PostDataType>
 }
-export type addPostActionCreatorType = {
-    type: 'ADD_POST',
-    postMessage: string
-}
 
 let initialState:ProfilePageType = {
         postData: [

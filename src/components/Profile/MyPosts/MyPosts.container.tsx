@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from "react";
 import {addPostActionCreator} from "../../../Redux/profile-reducer";
 import MyPosts from "./MyPosts";
-import StoreContext, {ProviderType} from "../../../store.context";
+import StoreContext from "../../../store.context";
 
 
 let MyPostsComponent = () => {
@@ -11,9 +11,6 @@ let MyPostsComponent = () => {
             <StoreContext.Consumer>
                 {
                 (store) => {
-
-
-
                     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
                         setValue(event.currentTarget.value)
                     }

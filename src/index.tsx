@@ -10,9 +10,7 @@ let rerenderEntireTree = () => {
 
 ReactDOM.render(
     <StoreContext.Provider value={store}>
-        <App
-            // store={store} dispatch={store.dispatch.bind(store)}
-        />
+        <App/>
     </StoreContext.Provider>,
     document.getElementById('root')
 );

@@ -19,16 +19,10 @@ const App: React.FC = () => {
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs'
                            render={() => <DialogsContainer
-                               // dialogsData={state.dialogPage.dialogsData}
-                               // messagesData={state.dialogPage.messagesData}
-                               // dispatch={props.dispatch.bind(props.store)}
                            />}/>
                     <Route path='/profile' render={() => <Profile
-                        // postData={state.profilePage.postData}
-                        // dispatch={props.dispatch.bind(props.store)}
                     />}/>
                     <Route path='/Friends' render={() => <Friends
-                        // friends={state.sideBar.friends}
                     />}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/music' component={() => <Music/>}/>

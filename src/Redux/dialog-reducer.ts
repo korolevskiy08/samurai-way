@@ -12,10 +12,6 @@ export type DialogPageType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
 }
-export type addMessageActionCreatorType =  {
-    type: 'ADD_NEW_MESSAGE',
-    dialogMessage: string
-}
 let initialState: DialogPageType = {
         dialogsData: [
             { id: 1, name: 'Marusia' },

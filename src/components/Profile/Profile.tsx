@@ -13,10 +13,7 @@ const Profile = () => {
             <div className={c.space}></div>
             <MyPhotos/>
             <div className={c.space}></div>
-            <MyPostsComponent
-             //    postData={props.postData}
-             //    dispatch={props.dispatch}
-            />
+            <MyPostsComponent/>
             <Post/>
         </div>
     )
