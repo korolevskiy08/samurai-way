@@ -8,7 +8,6 @@ type MyPostType = {
     value: any
     onChange: (event: ChangeEvent<HTMLInputElement>) => void
     addPostHandler: () => void
-    onKeyPressHandler: (event: KeyboardEvent<HTMLInputElement>) => void
     postData: Array<PostDataType>
 }
 
@@ -16,7 +15,6 @@ let MyPosts = ({
                    value,
                    onChange,
                    addPostHandler,
-                   onKeyPressHandler,
                    postData
                }: MyPostType) => {
 
@@ -32,7 +30,6 @@ let MyPosts = ({
                     <input
                         value={value}
                         onChange={onChange}
-                        onKeyPress={onKeyPressHandler}
                         className={c.inputText}/>
                 </div>
                 <div>

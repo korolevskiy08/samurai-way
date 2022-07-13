@@ -18,7 +18,8 @@ const App: React.FC = () => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route path='/dialogs'
-                           render={() => <DialogsContainer
+                           render={() =>
+                               <DialogsContainer
                            />}/>
                     <Route path='/profile' render={() => <Profile
                     />}/>
