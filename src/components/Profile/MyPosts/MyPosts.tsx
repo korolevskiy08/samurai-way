@@ -1,23 +1,23 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
+import React, {ChangeEvent} from "react";
 import c from './MyPosts.module.css';
 import {Button} from "../../Button/Button";
 import {PostDataType} from "../../../Redux/profile-reducer";
 import Post from "./Post/Post";
 
 type MyPostType = {
-    value: any
-    onChange: (event: ChangeEvent<HTMLInputElement>) => void
+    value: string
+    onChangeTextPost: (event: ChangeEvent<HTMLInputElement>) => void
     addPostHandler: () => void
     postData: Array<PostDataType>
 }
 
-let MyPosts = ({
+export let MyPosts = ({
                    value,
-                   onChange,
+                   onChangeTextPost,
                    addPostHandler,
                    postData
                }: MyPostType) => {
-
+    console.log(value)
     let postElements = postData.map((el, i) => <Post key={i} message={el.message} like={el.like}/>)
 
     return (
@@ -29,7 +29,7 @@ let MyPosts = ({
                 <div>
                     <input
                         value={value}
-                        onChange={onChange}
+                        onChange={onChangeTextPost}
                         className={c.inputText}/>
                 </div>
                 <div>

@@ -1,59 +1,15 @@
 import React, {ChangeEvent} from 'react';
-import {addMessageActionCreator} from '../../Redux/dialog-reducer';
+import {addMessageActionCreator, setNewMessageTextAC} from '../../Redux/dialog-reducer';
 import {RootState} from "../../Redux/redux-store";
 import {Dispatch} from "redux";
-import {setNewPostTextAC} from "../../Redux/profile-reducer";
 import {connect} from "react-redux";
-import MyPosts from "../Profile/MyPosts/MyPosts";
-
-// let DialogsContainer = () => {
-//     return (
-//         <div>
-//
-//             <StoreContext.Consumer>
-//                 {
-//                     (store) => {
-//
-//                         const newMessageText = (event: ChangeEvent<HTMLInputElement>) => {
-//                             let textMessage = event.currentTarget.value
-//                             setDialogMessage(textMessage)
-//                         }
-//
-//                         const addMessage = () => {
-//                             // props.dispatch({type: 'ADD-NEW-MESSAGE', dialogMessage: dialogMessage})
-//                             let action = addMessageActionCreator(dialogMessage)
-//                             store.dispatch(action)
-//                             setDialogMessage('')
-//                         }
-//
-//                         const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-//                             if (event.ctrlKey && event.code === 'Enter') {
-//                                 addMessage()
-//                             }
-//                         }
-//
-//                         return (
-//                             <Dialogs
-//                                 dialogMessage={dialogMessage}
-//                                 onKeyPressHandler={onKeyPressHandler}
-//                                 addMessage={addMessage}
-//                                 newMessageText={newMessageText}
-//                                 dialogsData={store.getState().dialogPage.dialogsData}
-//                                 messagesData={store.getState().dialogPage.messagesData}
-//                             />
-//                         )
-//                     }
-//                 }
-//             </StoreContext.Consumer>
-//         </div>
-//     )
-// }
+import Dialogs from "./Dialogs";
 
 let mapStateToProps = (state: RootState) => { // отвечает за пропсы значений
     return {
         dialogsData: state.dialogPage.dialogsData,
         messagesData: state.dialogPage.messagesData,
-        value: state.dialogPage.newMessageText
+        dialogMessage: state.dialogPage.newMessageText
     }
 }
 
@@ -63,12 +19,11 @@ let mapDispatchToProps = (dispatch: Dispatch) => { // отвечает за ко
         addMessage() {
             dispatch(addMessageActionCreator())
         },
-        newMessageText(event: ChangeEvent<HTMLInputElement>) {
-            dispatch(setNewPostTextAC(event.currentTarget.value))
+        onChangeNewMessageText(event: ChangeEvent<HTMLInputElement>) {
+            dispatch(setNewMessageTextAC(event.currentTarget.value))
         }
     }
 }
-const MyDialogComponent = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
-
+const MyDialogComponent = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
 export default MyDialogComponent

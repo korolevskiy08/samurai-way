@@ -28,11 +28,17 @@ const profileReducer = (state = initialState, action:ActionsType) => {
                 message: state.newPostText,
                 like: 0
             }
-            state.postData.push(newPost)
-            state.newPostText = ''
+            return {
+                ...state,
+                postData: [...state.postData, newPost],
+                newPostText: ''
+            }
             break;
         case "NEW-POST-TEXT":
-            state.newPostText = action.newPostText
+            return {
+                ...state,
+                newPostText: action.newPostText
+            }
     }
     return state
 }

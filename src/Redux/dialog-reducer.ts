@@ -13,6 +13,7 @@ export type DialogPageType = {
     messagesData: Array<MessagesDataType>
     newMessageText: string
 }
+
 let initialState: DialogPageType = {
     dialogsData: [
         {id: 1, name: 'Marusia'},
@@ -34,10 +35,18 @@ export const dialogReducer = (state = initialState, action: ActionsType) => {
                 id: 1,
                 message: state.newMessageText
             }
-            state.messagesData.push(newMessage)
+            return {
+                ...state,
+                dialogsData: [...state.dialogsData],
+                messagesData: [...state.messagesData, newMessage],
+                newMessageText: ''
+            }
             break;
-        case 'SET-NEW-TEXT':
-            state.newMessageText = action.newMessageText
+        case 'SET-NEW-MESSAGE-TEXT':
+            return {
+                ...state,
+                newMessageText: action.newMessageText
+            }
     }
     return state
 }
@@ -48,9 +57,9 @@ export const addMessageActionCreator = () => {
     } as const
 }
 
-export const setNewMessageTextAC = (text: string) => {
+export const setNewMessageTextAC = (textMessage: string) => {
     return {
-        type: 'SET-NEW-TEXT', newMessageText: text
+        type: 'SET-NEW-MESSAGE-TEXT', newMessageText: textMessage
     } as const
 }
 

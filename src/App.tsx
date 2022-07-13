@@ -10,6 +10,7 @@ import Setting from "./components/Settings/Setting";
 import Friends from "./components/Friends/Friends";
 import DialogsContainer from "./components/Dialogs/Dialogs.container";
 
+
 const App: React.FC = () => {
     return (
         <BrowserRouter>

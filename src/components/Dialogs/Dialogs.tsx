@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent} from 'react';
+import React, {ChangeEvent} from 'react';
 import c from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
@@ -9,20 +9,18 @@ type DialogPageType = {
     dialogMessage: string
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
-    newMessageText: (event: ChangeEvent<HTMLInputElement>) => void
+    onChangeNewMessageText: (event: ChangeEvent<HTMLInputElement>) => void
     addMessage: () => void
-    onKeyPressHandler: (event: KeyboardEvent<HTMLInputElement>) => void
 }
 
-let Dialogs = ({
+export let Dialogs = ({
                    dialogsData,
                    messagesData,
-                   newMessageText,
+                          onChangeNewMessageText,
                    addMessage,
-                   onKeyPressHandler,
                    dialogMessage
                }: DialogPageType) => {
-
+    console.log(dialogMessage)
     let dialogsElement = dialogsData.map((el, i) => <DialogItem key={i} name={el.name} id={el.id}/>)
     let messagesElement = messagesData.map((el, i) => <Message key={i} text={el.message} id={el.id}/>)
 
@@ -36,9 +34,8 @@ let Dialogs = ({
             </div>
             <div>
                 <div>
-                    <input onChange={newMessageText}
+                    <input onChange={onChangeNewMessageText}
                            value={dialogMessage}
-                           onKeyPress={onKeyPressHandler}
                     />
                 </div>
                 <div>
