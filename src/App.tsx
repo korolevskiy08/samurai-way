@@ -9,6 +9,7 @@ import News from "./components/News/News";
 import Setting from "./components/Settings/Setting";
 import Friends from "./components/Friends/Friends";
 import DialogsContainer from "./components/Dialogs/Dialogs.container";
+import { UsersComponent } from './components/Users/UsersComponent';
 
 
 const App: React.FC = () => {
@@ -18,17 +19,22 @@ const App: React.FC = () => {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs'
+                    <Route path='/Dialogs'
                            render={() =>
                                <DialogsContainer
                            />}/>
-                    <Route path='/profile' render={() => <Profile
+                    <Route path='/Profile' render={() => <Profile
                     />}/>
                     <Route path='/Friends' render={() => <Friends
                     />}/>
+                   <Route path='/Users' render={() => <UsersComponent
+                    />}/>
                     <Route path='/News' render={() => <News/>}/>
-                    <Route path='/music' component={() => <Music/>}/>
-                    <Route path='/setting' component={() => <Setting/>}/>
+                    <Route path='/Music' component={() => <Music/>}/>
+                    <Route path='/Setting' component={() => <Setting/>}/>
+                    
+                        
+                    
                 </div>
             </div>
         </BrowserRouter>
