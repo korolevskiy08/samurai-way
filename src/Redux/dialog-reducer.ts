@@ -14,7 +14,7 @@ export type DialogPageType = {
     newMessageText: string
 }
 
-let initialState: DialogPageType = {
+let initialState = {
     dialogsData: [
         {id: 1, name: 'Marusia'},
         {id: 2, name: 'Pablo'},
@@ -28,7 +28,7 @@ let initialState: DialogPageType = {
     newMessageText: ''
 }
 
-export const dialogReducer = (state = initialState, action: ActionsType) => {
+export const dialogReducer = (state = initialState, action: ActionsType): DialogPageType => {
     switch (action.type) {
         case 'ADD_NEW_MESSAGE':
             let newMessage = {

@@ -7,6 +7,7 @@ export type locationType = {
 
 export type UserType = {
     id: number
+    photoURL: string
     followed: boolean
     fullName: string
     status: string
@@ -17,19 +18,19 @@ export type initialStateType = {
     users: Array<UserType>
 }
 
-let initialState:initialStateType = {
+let initialState = {
     users: [
-        {id: 1, followed: false, fullName: 'Dmitry', status: 'I boss', 
+        {id: 1,photoURL:'https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v937-aew-111_3.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=8ce2cd03f94f2baddcb332cfb50f78b9', followed: false, fullName: 'Dmitry', status: 'I boss', 
         location: {
             city: 'Minsk',
             country: 'Belarus'
         }},
-        {id: 2, followed: true, fullName: 'Zhenya', status: 'Small boss', 
+        {id: 2,photoURL:'https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v937-aew-111_3.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=8ce2cd03f94f2baddcb332cfb50f78b9', followed: true, fullName: 'Zhenya', status: 'Small boss', 
         location: {
             city: 'Moscow',
             country: 'Russia'
         }},
-        {id: 3, followed: true, fullName: 'Pablo', status: '...', 
+        {id: 3,photoURL:'https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v937-aew-111_3.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=8ce2cd03f94f2baddcb332cfb50f78b9', followed: true, fullName: 'Pablo', status: '...', 
         location: {
             city: 'Warshawa',
             country: 'Poland'
@@ -37,7 +38,7 @@ let initialState:initialStateType = {
     ]
 }
 
-export const userReducer = (state = initialState, action: ActionsType):initialStateType => {
+export const userReducer = (state:initialStateType = initialState, action: ActionsType):initialStateType => {
 switch (action.type) {
     case 'FOLLOW':
         return {

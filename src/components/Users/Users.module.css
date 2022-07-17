@@ -1,0 +1,11 @@
+.contantContainer{
+    width: 650px;
+    display: flex;
+    justify-content: center;
+}
+
+.discription{
+    display: flex;
+   width: 500px;
+   justify-content: space-between;
+}

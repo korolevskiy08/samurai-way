@@ -1,11 +1,24 @@
 import React, {ChangeEvent} from 'react';
-import {addMessageActionCreator, setNewMessageTextAC} from '../../Redux/dialog-reducer';
+import {addMessageActionCreator, DialogsDataType, MessagesDataType, setNewMessageTextAC} from '../../Redux/dialog-reducer';
 import {RootState} from "../../Redux/redux-store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import Dialogs from "./Dialogs";
 
-let mapStateToProps = (state: RootState) => { // отвечает за пропсы значений
+type mapStateToPropsType = {
+    dialogsData: Array<DialogsDataType>
+    messagesData: Array<MessagesDataType>
+    dialogMessage: string
+}
+
+type mapDispatchToPropsType = {
+    addMessage: () => void
+    onChangeNewMessageText: (event: ChangeEvent<HTMLInputElement>) => void
+}
+
+export type dialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
+
+let mapStateToProps = (state: RootState):mapStateToPropsType => { // отвечает за пропсы значений
     return {
         dialogsData: state.dialogPage.dialogsData,
         messagesData: state.dialogPage.messagesData,
@@ -13,7 +26,7 @@ let mapStateToProps = (state: RootState) => { // отвечает за проп�
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch) => { // отвечает за коллбэки
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => { // отвечает за коллбэки
 
     return {
         addMessage() {

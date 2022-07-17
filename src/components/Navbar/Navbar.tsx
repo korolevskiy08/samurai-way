@@ -12,6 +12,9 @@ import {NavLink} from 'react-router-dom';
                     <NavLink to='/Dialogs' activeClassName={classes.active}> Messages </NavLink>
                 </div>
                 <div className = {`${classes.item}`}>
+                    <NavLink to='/Users' activeClassName={classes.active}> Users </NavLink>
+                </div>
+                <div className = {`${classes.item}`}>
                     <NavLink to='/News' activeClassName={classes.active}> News </NavLink>
                 </div>
                 <div className = {`${classes.item}`}>

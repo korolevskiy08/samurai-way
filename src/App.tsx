@@ -10,6 +10,7 @@ import Setting from "./components/Settings/Setting";
 import Friends from "./components/Friends/Friends";
 import DialogsContainer from "./components/Dialogs/Dialogs.container";
 import { UsersComponent } from './components/Users/UsersComponent';
+import { UsersContainer } from './components/Users/UsersContainer';
 
 
 const App: React.FC = () => {
@@ -27,7 +28,7 @@ const App: React.FC = () => {
                     />}/>
                     <Route path='/Friends' render={() => <Friends
                     />}/>
-                   <Route path='/Users' render={() => <UsersComponent
+                   <Route path='/Users' render={() => <UsersContainer
                     />}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Music' component={() => <Music/>}/>

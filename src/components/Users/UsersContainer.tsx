@@ -12,7 +12,7 @@ type mapStateToPropsType = {
 type mapDispatchToPropsType = {
     follow: (userID:number) => void
     unFollow: (userID: number) => void
-    setUsers: (users: initialStateType) => void
+    setUsers: (users: Array<UserType>) => void
 }
 
 export type usersPropsType = mapStateToPropsType & mapDispatchToPropsType
@@ -37,4 +37,4 @@ const mapDispatchToProps = (dispatch: Dispatch):mapDispatchToPropsType => {
     }
 }
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersComponent)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersComponent)

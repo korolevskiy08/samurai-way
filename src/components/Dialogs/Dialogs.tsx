@@ -4,14 +4,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Button} from "../Button/Button";
 import {DialogsDataType, MessagesDataType} from '../../Redux/dialog-reducer';
-
-type DialogPageType = {
-    dialogMessage: string
-    dialogsData: Array<DialogsDataType>
-    messagesData: Array<MessagesDataType>
-    onChangeNewMessageText: (event: ChangeEvent<HTMLInputElement>) => void
-    addMessage: () => void
-}
+import { dialogsPropsType } from './Dialogs.container';
 
 export let Dialogs = ({
                    dialogsData,
@@ -19,7 +12,7 @@ export let Dialogs = ({
                           onChangeNewMessageText,
                    addMessage,
                    dialogMessage
-               }: DialogPageType) => {
+               }: dialogsPropsType) => {
     console.log(dialogMessage)
     let dialogsElement = dialogsData.map((el, i) => <DialogItem key={i} name={el.name} id={el.id}/>)
     let messagesElement = messagesData.map((el, i) => <Message key={i} text={el.message} id={el.id}/>)

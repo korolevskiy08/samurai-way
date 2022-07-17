@@ -1,22 +1,15 @@
 import React, {ChangeEvent} from "react";
 import c from './MyPosts.module.css';
 import {Button} from "../../Button/Button";
-import {PostDataType} from "../../../Redux/profile-reducer";
 import Post from "./Post/Post";
-
-type MyPostType = {
-    value: string
-    onChangeTextPost: (event: ChangeEvent<HTMLInputElement>) => void
-    addPostHandler: () => void
-    postData: Array<PostDataType>
-}
+import { profilePropsType } from "./MyPosts.container";
 
 export let MyPosts = ({
                    value,
                    onChangeTextPost,
                    addPostHandler,
                    postData
-               }: MyPostType) => {
+               }: profilePropsType) => {
     console.log(value)
     let postElements = postData.map((el, i) => <Post key={i} message={el.message} like={el.like}/>)
 
