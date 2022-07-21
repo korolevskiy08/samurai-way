@@ -28,10 +28,10 @@ let mapStateToProps = (state: RootState):mapStateToPropsType => { // отвеч�
 let mapDispatchToProps = (dispatch: Dispatch):mapDispatchToPropsType => { // отвечает за коллбэки
 
     return {
-        addPostHandler () {
+        addPostHandler: () => {
             dispatch(addPostActionCreator())
         },
-        onChangeTextPost (event: ChangeEvent<HTMLInputElement>) {
+        onChangeTextPost: (event: ChangeEvent<HTMLInputElement>) => {
             dispatch(setNewPostTextAC(event.currentTarget.value))
         }
     }

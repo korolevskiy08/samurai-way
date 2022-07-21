@@ -56,7 +56,6 @@ export const addMessageActionCreator = () => {
         type: 'ADD_NEW_MESSAGE'
     } as const
 }
-
 export const setNewMessageTextAC = (textMessage: string) => {
     return {
         type: 'SET-NEW-MESSAGE-TEXT', newMessageText: textMessage

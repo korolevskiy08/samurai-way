@@ -1,5 +1,10 @@
 import React, {ChangeEvent} from 'react';
-import {addMessageActionCreator, DialogsDataType, MessagesDataType, setNewMessageTextAC} from '../../Redux/dialog-reducer';
+import {
+    addMessageActionCreator,
+    DialogsDataType,
+    MessagesDataType,
+    setNewMessageTextAC
+} from '../../Redux/dialog-reducer';
 import {RootState} from "../../Redux/redux-store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
@@ -10,22 +15,20 @@ type mapStateToPropsType = {
     messagesData: Array<MessagesDataType>
     dialogMessage: string
 }
-
 type mapDispatchToPropsType = {
     addMessage: () => void
     onChangeNewMessageText: (event: ChangeEvent<HTMLInputElement>) => void
 }
-
 export type dialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
-let mapStateToProps = (state: RootState):mapStateToPropsType => { // отвечает за пропсы значений
+
+let mapStateToProps = (state: RootState): mapStateToPropsType => { // отвечает за пропсы значений
     return {
         dialogsData: state.dialogPage.dialogsData,
         messagesData: state.dialogPage.messagesData,
         dialogMessage: state.dialogPage.newMessageText
     }
 }
-
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => { // отвечает за коллбэки
 
     return {
@@ -37,6 +40,7 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => { // о
         }
     }
 }
+
 const MyDialogComponent = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
 export default MyDialogComponent

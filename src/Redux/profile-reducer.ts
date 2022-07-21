@@ -11,7 +11,7 @@ export type ProfilePageType = {
     newPostText: string
 }
 
-let initialState = {
+let initialState:ProfilePageType = {
         postData: [
             { id: 1, message: 'Hi, how are you?', like: 6 },
             { id: 2, message: 'My first post', like: 7 },
@@ -20,7 +20,7 @@ let initialState = {
     newPostText: ''
 }
 
-const profileReducer = (state = initialState, action:ActionsType):ProfilePageType => {
+const profileReducer = (state = initialState, action:ActionsType) => {
     switch (action.type) {
         case 'ADD_POST':
             let newPost = {

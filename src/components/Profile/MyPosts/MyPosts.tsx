@@ -10,8 +10,12 @@ export let MyPosts = ({
                    addPostHandler,
                    postData
                }: profilePropsType) => {
-    console.log(value)
-    let postElements = postData.map((el, i) => <Post key={i} message={el.message} like={el.like}/>)
+
+    let postElements = postData.map((el, i) => {
+        return(
+            <Post key={i} message={el.message} like={el.like}/>
+        )
+    })
 
     return (
         <div>

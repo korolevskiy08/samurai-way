@@ -3,17 +3,18 @@ import c from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Button} from "../Button/Button";
-import {DialogsDataType, MessagesDataType} from '../../Redux/dialog-reducer';
-import { dialogsPropsType } from './Dialogs.container';
+import {dialogsPropsType} from "./Dialogs.container";
+
 
 export let Dialogs = ({
-                   dialogsData,
-                   messagesData,
+                          dialogsData,
+                          messagesData,
                           onChangeNewMessageText,
-                   addMessage,
-                   dialogMessage
-               }: dialogsPropsType) => {
+                          addMessage,
+                          dialogMessage
+                      }: dialogsPropsType) => {
     console.log(dialogMessage)
+
     let dialogsElement = dialogsData.map((el, i) => <DialogItem key={i} name={el.name} id={el.id}/>)
     let messagesElement = messagesData.map((el, i) => <Message key={i} text={el.message} id={el.id}/>)
 
