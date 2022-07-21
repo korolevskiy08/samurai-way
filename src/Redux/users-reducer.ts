@@ -4,7 +4,6 @@ export type PhotosType = {
     small: any
     large: any
 }
-
 export type ItemsType = {
     name: string
     id: number
@@ -14,7 +13,6 @@ export type ItemsType = {
     status: string
     followed: boolean
 }
-
 export type initialStateType = {
     items: Array<ItemsType>
 }

@@ -5,7 +5,6 @@ export type PostDataType = {
     message: string
     like: number
 }
-
 export type ProfilePageType = {
     postData: Array<PostDataType>
     newPostText: string
