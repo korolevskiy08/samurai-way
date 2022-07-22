@@ -8,18 +8,23 @@ import userPhoto from '../../assets/UserImg.png'
 
 export class UsersC extends React.Component<any, any>{
 
-    getUsers = () => {
-        if (this.props.items.length === 0) {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+    // getUsers = () => {
+    //     if (this.props.items.length === 0) {
+    //         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+    //             this.props.setUsers(response.data.items)
+    //         })
+    //     }
+    // }
+
+    componentDidMount(){
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
                 this.props.setUsers(response.data.items)
             })
-        }
     }
-
     render() {
         return (
             <div>
-                <button onClick={this.getUsers}>Get Users</button>
+                {/* <button onClick={this.getUsers}>Get Users</button> */}
                 {
                     this.props.items.map((el: any) => {
 
