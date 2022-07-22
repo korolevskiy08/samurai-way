@@ -1,7 +1,8 @@
 import react from 'react';
 import {connect} from "react-redux";
 import {RootState} from '../../Redux/redux-store';
-import {UsersComponent} from './UsersComponent';
+// import {UsersComponent} from './UsersComponent';
+import {UsersC} from './UsersC';
 import {Dispatch} from "redux";
 import {followAC, ItemsType, setUsersAC, unFollowAC,} from '../../Redux/users-reducer';
 
@@ -37,4 +38,5 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersComponent)
+// export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersComponent)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersC)
