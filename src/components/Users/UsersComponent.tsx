@@ -7,15 +7,17 @@ import userPhoto from '../../assets/UserImg.png'
 
 export const UsersComponent = (props: usersPropsType) => {
 
-if(props.items.length === 0){
-
-    axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-        props.setUsers(response.data.items)
-    })
-}
+    let getUsers = () => {
+        if (props.items.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+                props.setUsers(response.data.items)
+            })
+        }
+    }
 
     return (
         <div>
+            <button onClick={getUsers}>Get Users</button>
             {
                 props.items.map(el => {
 
@@ -27,7 +29,7 @@ if(props.items.length === 0){
                                 <div>
                                     <img
                                         style={{width: '50px'}}
-                                        src={el.photos.small !== null ? el.photos.small : userPhoto }/>
+                                        src={el.photos.small !== null ? el.photos.small : userPhoto}/>
                                 </div>
                                 <div>
                                     {el.followed

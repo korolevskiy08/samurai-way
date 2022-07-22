@@ -49,7 +49,7 @@ export const userReducer = (state: initialStateType = initialState, action: Acti
             }
         case 'SET-USERS':
             return {
-                ...state, items: [...state.items, ...action.users]
+                ...state, items: [...state.items, ...action.item]
             }
         default:
             return state
@@ -66,8 +66,8 @@ export const unFollowAC = (userID: any) => {
         type: 'UN-FOLLOW', userID
     } as const
 }
-export const setUsersAC = (users: any) => {
+export const setUsersAC = (item: any) => {
     return {
-        type: 'SET-USERS', users
+        type: 'SET-USERS', item
     } as const
 }
