@@ -8,6 +8,9 @@ import {followAC, ItemsType, setUsersAC, unFollowAC,} from '../../Redux/users-re
 
 type mapStateToPropsType = {
     items: Array<ItemsType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 type mapDispatchToPropsType = {
@@ -20,7 +23,10 @@ export type usersPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 const mapStateToProps = (state: RootState): mapStateToPropsType => {
     return {
-        items: state.usersPage.items
+        items: state.usersPage.items,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage
     }
 }
 

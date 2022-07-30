@@ -5,26 +5,38 @@ import axios from 'axios';
 import userPhoto from '../../assets/UserImg.png'
 
 
+export class UsersC extends React.Component<any, any> {
 
-export class UsersC extends React.Component<any, any>{
-
-    // getUsers = () => {
-    //     if (this.props.items.length === 0) {
-    //         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-    //             this.props.setUsers(response.data.items)
-    //         })
-    //     }
-    // }
-
-    componentDidMount(){
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-                this.props.setUsers(response.data.items)
-            })
+    componentDidMount() {
+//`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users`).then(response => {
+            this.props.setUsers(response.data.items)
+        })
     }
+
     render() {
+
+        let pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+
+        let pages = []
+
+        for (let i = 1; i <= pageCount; i++) {
+            pages.push(i)
+        }
+
         return (
             <div>
-                {/* <button onClick={this.getUsers}>Get Users</button> */}
+                <div>
+
+                    {pages.map((el, i) => {
+                        let styleNumberPage = this.props.currentPage === el ? classes.selectedPage : ''
+                        return (
+
+                            <span className={styleNumberPage} key={i}>{el}</span>
+                        )
+                    })}
+
+                </div>
                 {
                     this.props.items.map((el: any) => {
 

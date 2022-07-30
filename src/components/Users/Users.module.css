@@ -9,3 +9,7 @@
    width: 500px;
    justify-content: space-between;
 }
+
+.selectedPage{
+    font-weight: bold;
+}

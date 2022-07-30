@@ -15,10 +15,16 @@ export type ItemsType = {
 }
 export type initialStateType = {
     items: Array<ItemsType>
+    pageSize: number,
+    totalUsersCount: number
+    currentPage: number
 }
 
 let initialState = {
-    items: []
+    items: [],
+    pageSize: 5,
+    totalUsersCount: 21,
+    currentPage: 2
 }
 
 export const userReducer = (state: initialStateType = initialState, action: ActionsType): initialStateType => {
