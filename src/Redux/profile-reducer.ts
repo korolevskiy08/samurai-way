@@ -1,5 +1,3 @@
-import {ActionsType} from "./redux-store";
-
 export type PostDataType = {
     id: number
     message: string
@@ -19,7 +17,11 @@ let initialState:ProfilePageType = {
     newPostText: ''
 }
 
-const profileReducer = (state = initialState, action:ActionsType) => {
+type ActionType = ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof setNewPostTextAC>
+
+
+const profileReducer = (state = initialState, action:ActionType) => {
     switch (action.type) {
         case 'ADD_POST':
             let newPost = {

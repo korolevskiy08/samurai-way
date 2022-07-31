@@ -1,5 +1,3 @@
-import {ActionsType} from "./redux-store";
-
 export type DialogsDataType = {
     id: number
     name: string
@@ -28,7 +26,10 @@ let initialState = {
     newMessageText: ''
 }
 
-export const dialogReducer = (state = initialState, action: ActionsType): DialogPageType => {
+type ActionType = ReturnType<typeof addMessageActionCreator>
+    | ReturnType<typeof setNewMessageTextAC>
+
+export const dialogReducer = (state = initialState, action: ActionType): DialogPageType => {
     switch (action.type) {
         case 'ADD_NEW_MESSAGE':
             let newMessage = {

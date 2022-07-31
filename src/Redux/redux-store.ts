@@ -17,12 +17,4 @@ export type ReduxStoreType = typeof store
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
-export type ActionsType = ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof setNewPostTextAC>
-    | ReturnType<typeof addMessageActionCreator>
-    | ReturnType<typeof setNewMessageTextAC>
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof unFollowAC>
-    | ReturnType<typeof setUsersAC>
-
 export default store

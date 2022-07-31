@@ -1,15 +1,19 @@
 import React from 'react';
-import {usersPropsType} from './UsersContainer';
 import classes from './Users.module.css';
 import axios from 'axios';
 import userPhoto from '../../assets/UserImg.png'
 
-
 export class UsersC extends React.Component<any, any> {
 
     componentDidMount() {
-//`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+            this.props.setTotalCount(response.data.totalCount)
+        })
+    }
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
             this.props.setUsers(response.data.items)
         })
     }
@@ -31,8 +35,9 @@ export class UsersC extends React.Component<any, any> {
                     {pages.map((el, i) => {
                         let styleNumberPage = this.props.currentPage === el ? classes.selectedPage : ''
                         return (
-
-                            <span className={styleNumberPage} key={i}>{el}</span>
+                            <span className={styleNumberPage}
+                                  key={i}
+                                  onClick={(e) => {this.onPageChanged(el)}}>{el}</span>
                         )
                     })}
 
