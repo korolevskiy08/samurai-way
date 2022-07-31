@@ -6,6 +6,7 @@ export type PostDataType = {
 export type ProfilePageType = {
     postData: Array<PostDataType>
     newPostText: string
+    profile: any
 }
 
 let initialState:ProfilePageType = {
@@ -14,12 +15,13 @@ let initialState:ProfilePageType = {
             { id: 2, message: 'My first post', like: 7 },
             { id: 3, message: 'Hello, my friend', like: 99 }
         ],
-    newPostText: ''
+    newPostText: '',
+    profile: null
 }
 
 type ActionType = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof setNewPostTextAC>
-
+    | ReturnType<typeof setUserProfileAC>
 
 const profileReducer = (state = initialState, action:ActionType) => {
     switch (action.type) {
@@ -40,6 +42,12 @@ const profileReducer = (state = initialState, action:ActionType) => {
                 ...state,
                 newPostText: action.newPostText
             }
+        case "SET-USER-PROFILE":
+            return {
+                ...state,
+                profile: action.profile
+            }
+
     }
     return state
 }
@@ -49,10 +57,14 @@ export const addPostActionCreator = () => {
         type: 'ADD_POST'
     } as const
 }
-
 export const setNewPostTextAC = (text: string) => {
     return {
         type: 'NEW-POST-TEXT', newPostText: text
+    } as const
+}
+export const setUserProfileAC = (profile: any) => {
+    return {
+        type: 'SET-USER-PROFILE', profile
     } as const
 }
 

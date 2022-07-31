@@ -11,6 +11,7 @@ import Friends from "./components/Friends/Friends";
 import DialogsContainer from "./components/Dialogs/Dialogs.container";
 
 import {UsersComponent} from './components/Users/UsersContainer';
+import {ProfileComponent} from "./components/Profile/ProfileConteiner";
 
 
 const App: React.FC = () => {
@@ -24,7 +25,7 @@ const App: React.FC = () => {
                            render={() =>
                                <DialogsContainer
                            />}/>
-                    <Route path='/Profile' render={() => <Profile
+                    <Route path='/Profile' render={() => <ProfileComponent
                     />}/>
                     <Route path='/Friends' render={() => <Friends
                     />}/>
