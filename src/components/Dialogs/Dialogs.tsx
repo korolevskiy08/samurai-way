@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import c from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {Button} from "../Button/Button";
+import {Button} from "../common/Button/Button";
 import {dialogsPropsType} from "./Dialogs.container";
 
 

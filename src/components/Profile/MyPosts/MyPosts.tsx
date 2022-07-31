@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
 import c from './MyPosts.module.css';
-import {Button} from "../../Button/Button";
+import {Button} from "../../common/Button/Button";
 import Post from "./Post/Post";
 import { profilePropsType } from "./MyPosts.container";
 
