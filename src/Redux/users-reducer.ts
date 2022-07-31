@@ -20,7 +20,7 @@ export type initialStateType = {
 
 let initialState = {
     items: [],
-    pageSize: 5,
+    pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1
 }

@@ -1,52 +1,48 @@
 import React from 'react';
-import classes from './Users.module.css';
-import axios from 'axios';
-import userPhoto from '../../assets/UserImg.png'
+import classes from "./Users.module.css";
+import userPhoto from "../../assets/UserImg.png";
+import {ItemsType} from "../../Redux/users-reducer";
 
-export class UsersC extends React.Component<any, any> {
+type UsersType = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (pageNumber: number) => void
+    items: Array<ItemsType>
+    unFollow: (userID: number) => void
+    follow: (userID: number) => void
+}
 
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-            this.props.setUsers(response.data.items)
-            this.props.setTotalCount(response.data.totalCount)
-        })
+const Users = (props: UsersType) => {
+
+    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
+
+    let pages = []
+
+    for (let i = 1; i <= pageCount; i++) {
+        pages.push(i)
     }
-    onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-            this.props.setUsers(response.data.items)
-        })
-    }
 
-    render() {
-
-        let pageCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-
-        let pages = []
-
-        for (let i = 1; i <= pageCount; i++) {
-            pages.push(i)
-        }
-
-        return (
+    return (
+        <div>
             <div>
                 <div>
 
                     {pages.map((el, i) => {
-                        let styleNumberPage = this.props.currentPage === el ? classes.selectedPage : ''
+                        let styleNumberPage = props.currentPage === el ? classes.selectedPage : ''
                         return (
                             <span className={styleNumberPage}
                                   key={i}
-                                  onClick={(e) => {this.onPageChanged(el)}}>{el}</span>
+                                  onClick={(e) => {props.onPageChanged(el)}}>{el}</span>
                         )
                     })}
 
                 </div>
                 {
-                    this.props.items.map((el: any) => {
+                    props.items.map((el: any) => {
 
-                        const unFollowHandler = () => this.props.unFollow(el.id)
-                        const followHandler = () => this.props.follow(el.id)
+                        const unFollowHandler = () => props.unFollow(el.id)
+                        const followHandler = () => props.follow(el.id)
                         return (
                             <div className={classes.contantContainer}>
                                 <div>
@@ -76,6 +72,8 @@ export class UsersC extends React.Component<any, any> {
                     })
                 }
             </div>
-        )
-    }
-}
+        </div>
+    );
+};
+
+export default Users;
