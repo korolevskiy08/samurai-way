@@ -97,7 +97,6 @@ export class UsersContainer extends React.Component<usersPropsType> {
                    follow={this.props.follow}
             />
         </>
-
     }
 }
 

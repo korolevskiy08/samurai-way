@@ -1,17 +1,11 @@
 import React from "react";
 import c from './Profile.module.css';
 import Post from "./MyPosts/Post/Post";
-import MyPhotos from "./MyPhotos/MyPhotos";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsComponent from "./MyPosts/MyPosts.container";
-import {Preloader} from "../common/Preloader/Preloader";
 
-const Profile = (props:any) => {
 
-    if(!props.profile) {
-        return <Preloader />
-    }
-
+const Profile = (props: any) => {
     return (
         <div>
             <ProfileInfo profile={props.profile}/>

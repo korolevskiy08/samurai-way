@@ -9,7 +9,6 @@ import News from "./components/News/News";
 import Setting from "./components/Settings/Setting";
 import Friends from "./components/Friends/Friends";
 import DialogsContainer from "./components/Dialogs/Dialogs.container";
-
 import {UsersComponent} from './components/Users/UsersContainer';
 import {ProfileComponent} from "./components/Profile/ProfileConteiner";
 
@@ -25,7 +24,7 @@ const App: React.FC = () => {
                            render={() =>
                                <DialogsContainer
                            />}/>
-                    <Route path='/Profile' render={() => <ProfileComponent
+                    <Route path='/Profile/:userId?' render={() => <ProfileComponent
                     />}/>
                     <Route path='/Friends' render={() => <Friends
                     />}/>

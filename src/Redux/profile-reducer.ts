@@ -3,10 +3,37 @@ export type PostDataType = {
     message: string
     like: number
 }
+
+type PhotosType = {
+    large: string
+    small: string
+}
+
+type ContactsType = {
+    facebook: string | null
+    github: string | null
+    instagram: string | null
+    mainLink: string | null
+    twitter: string | null
+    vk: string | null
+    website: string | null
+    youtube: string | null
+}
+
+export type ProfileType = {
+    aboutMe: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    ContactsType: ContactsType
+    PhotosType: PhotosType
+    userId: number
+}
+
 export type ProfilePageType = {
     postData: Array<PostDataType>
     newPostText: string
-    profile: any
+    profile: ProfileType | null
 }
 
 let initialState:ProfilePageType = {
@@ -23,7 +50,7 @@ type ActionType = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof setNewPostTextAC>
     | ReturnType<typeof setUserProfileAC>
 
-const profileReducer = (state = initialState, action:ActionType) => {
+const profileReducer = (state = initialState, action:ActionType): ProfilePageType => {
     switch (action.type) {
         case 'ADD_POST':
             let newPost = {
