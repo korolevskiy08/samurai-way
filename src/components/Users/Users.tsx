@@ -3,6 +3,7 @@ import classes from "./Users.module.css";
 import userPhoto from "../../assets/UserImg.png";
 import {ItemsType} from "../../Redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UsersType = {
     totalUsersCount: number
@@ -34,7 +35,9 @@ const Users = (props: UsersType) => {
                         return (
                             <span className={styleNumberPage}
                                   key={i}
-                                  onClick={(e) => {props.onPageChanged(el)}}>{el}</span>
+                                  onClick={(e) => {
+                                      props.onPageChanged(el)
+                                  }}>{el}</span>
                         )
                     })}
 
@@ -42,8 +45,33 @@ const Users = (props: UsersType) => {
                 {
                     props.items.map((el: any) => {
 
-                        const unFollowHandler = () => props.unFollow(el.id)
-                        const followHandler = () => props.follow(el.id)
+                        const unFollowHandler = () => {
+                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,  {
+                                withCredentials: true,
+                                headers: {
+                                    "API-KEY": "6a186eca-b950-4867-b1d4-cf6c7447fc05"
+                                }
+                            }).then(response => {
+                               if(response.data.resultCode === 0){
+                                   props.unFollow(el.id)
+                               }
+                            })
+                        }
+
+                        const followHandler = () => {
+                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
+                                withCredentials: true,
+                                headers: {
+                                    "API-KEY": "6a186eca-b950-4867-b1d4-cf6c7447fc05"
+                                }
+                            }).then(response => {
+                                if(response.data.resultCode === 0){
+                                    props.unFollow(el.id)
+                                }
+                            })
+                            props.follow(el.id)
+                        }
+
                         return (
                             <div className={classes.contantContainer}>
                                 <div>
