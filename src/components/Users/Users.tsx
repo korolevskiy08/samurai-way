@@ -28,6 +28,23 @@ const Users = (props: UsersType) => {
         pages.push(i)
     }
 
+    pages.length = 9
+    if (props.currentPage > 4) {
+        pages[0] = props.currentPage - 4
+        pages[1] = props.currentPage - 3
+        pages[2] = props.currentPage - 2
+        pages[3] = props.currentPage - 1
+        pages[4] = props.currentPage
+        pages[5] = props.currentPage + 1
+        pages[6] = props.currentPage + 2
+        pages[7] = props.currentPage + 3
+        pages[8] = props.currentPage + 4
+    } else if (props.currentPage === pages.length) {
+        pages[0] = props.currentPage - 2
+        pages[1] = props.currentPage - 1
+        pages[2] = props.currentPage
+    }
+
     return (
         <div>
             <div>
@@ -39,7 +56,7 @@ const Users = (props: UsersType) => {
                                   key={i}
                                   onClick={(e) => {
                                       props.onPageChanged(el)
-                                  }}>{el}</span>
+                                  }}>{el + ' '}</span>
                         )
                     })}
 
@@ -90,8 +107,9 @@ const Users = (props: UsersType) => {
                                     </div>
                                     <div>
                                         {el.followed
-                                            ? <button disabled={props.followingInProgress.some((id:any) => id === el.id)} onClick={followHandler}>Follow</button>
-                                            : <button disabled={props.followingInProgress.some((id:any) => id === el.id)} onClick={unFollowHandler}>Unfollow</button>
+                                            ? <button disabled={props.followingInProgress.some((id:any) => id === el.id)} onClick={unFollowHandler}>Unfollow</button>
+                                            : <button disabled={props.followingInProgress.some((id:any) => id === el.id)} onClick={followHandler}>Follow</button>
+
                                         }
 
                                     </div>
