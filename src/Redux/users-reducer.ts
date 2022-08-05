@@ -17,6 +17,7 @@ export type initialStateType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<number>
 }
 
 let initialState:initialStateType = {
@@ -25,6 +26,7 @@ let initialState:initialStateType = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
+    followingInProgress: []
 }
 
 type ActionType = ReturnType<typeof followAC>
@@ -33,6 +35,7 @@ type ActionType = ReturnType<typeof followAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalCountAC>
     | ReturnType<typeof toggleIsFetchingAC>
+    | ReturnType<typeof toggleFollowingProgressAC>
 
 export const userReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
@@ -45,9 +48,7 @@ export const userReducer = (state: initialStateType = initialState, action: Acti
                             return {...el, followed: true}
                         }
                         return el
-
                     })
-
             }
         case 'UN-FOLLOW':
             return {
@@ -79,7 +80,13 @@ export const userReducer = (state: initialStateType = initialState, action: Acti
                 ...state,
                 isFetching: action.isFetching
             }
-    
+        case "TOGGLE-FOLLOWING-PROGRESS":
+            return {
+                ...state,
+                followingInProgress: action.isFetchingDisable
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
+            }
         default:
             return state
     }
@@ -113,5 +120,10 @@ export const setTotalCountAC = (totalUsersCount: number) => {
 export const toggleIsFetchingAC = (isFetching: boolean) => {
     return {
         type: 'TOGGLE-IS-FETCHING', isFetching
+    } as const
+}
+export const toggleFollowingProgressAC = (isFetchingDisable: boolean, userId: number) => {
+    return {
+        type: "TOGGLE-FOLLOWING-PROGRESS", isFetchingDisable, userId
     } as const
 }
