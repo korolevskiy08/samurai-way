@@ -19,12 +19,12 @@ export type initialStateType = {
     isFetching: boolean
 }
 
-let initialState = {
+let initialState:initialStateType = {
     items: [],
     pageSize: 100,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: true
+    isFetching: true,
 }
 
 type ActionType = ReturnType<typeof followAC>
@@ -79,6 +79,7 @@ export const userReducer = (state: initialStateType = initialState, action: Acti
                 ...state,
                 isFetching: action.isFetching
             }
+    
         default:
             return state
     }

@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from "./Users.module.css";
 import userPhoto from "../../assets/UserImg.png";
-import {ItemsType} from "../../Redux/users-reducer";
-import {NavLink} from "react-router-dom";
+import { ItemsType } from "../../Redux/users-reducer";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 
 type UsersType = {
@@ -34,29 +34,28 @@ const Users = (props: UsersType) => {
                         let styleNumberPage = props.currentPage === el ? classes.selectedPage : ''
                         return (
                             <span className={styleNumberPage}
-                                  key={i}
-                                  onClick={(e) => {
-                                      props.onPageChanged(el)
-                                  }}>{el}</span>
+                                key={i}
+                                onClick={(e) => {
+                                    props.onPageChanged(el)
+                                }}>{el}</span>
                         )
                     })}
 
                 </div>
                 {
                     props.items.map((el: any) => {
-
                         const unFollowHandler = () => {
-                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`,  {
+
+                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {
                                 withCredentials: true,
                                 headers: {
                                     "API-KEY": "6a186eca-b950-4867-b1d4-cf6c7447fc05"
                                 }
                             }).then(response => {
-                               if(response.data.resultCode === 0){
-                                   props.unFollow(el.id)
-                               }
-                            })
-                        }
+                                if (response.data.resultCode === 0) {
+                                    props.unFollow(el.id)
+                                }
+                            })}
 
                         const followHandler = () => {
                             axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
@@ -65,11 +64,11 @@ const Users = (props: UsersType) => {
                                     "API-KEY": "6a186eca-b950-4867-b1d4-cf6c7447fc05"
                                 }
                             }).then(response => {
-                                if(response.data.resultCode === 0){
-                                    props.unFollow(el.id)
+                                if (response.data.resultCode === 0) {
+                                    props.follow(el.id)
                                 }
                             })
-                            props.follow(el.id)
+                            
                         }
 
                         return (
@@ -78,8 +77,8 @@ const Users = (props: UsersType) => {
                                     <div>
                                         <NavLink to={'/profile/' + el.id}>
                                             <img
-                                                style={{width: '50px'}}
-                                                src={el.photos.small !== null ? el.photos.small : userPhoto}/>
+                                                style={{ width: '50px' }}
+                                                src={el.photos.small !== null ? el.photos.small : userPhoto} />
                                         </NavLink>
 
                                     </div>
