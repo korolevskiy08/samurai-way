@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Profile/Profile";
 import {BrowserRouter, Route} from 'react-router-dom';
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
@@ -12,7 +10,6 @@ import DialogsContainer from "./components/Dialogs/Dialogs.container";
 import {UsersComponent} from './components/Users/UsersContainer';
 import {ProfileComponent} from "./components/Profile/ProfileConteiner";
 import HeaderContainer from './components/Header/HeaderContainer';
-
 
 const App: React.FC = () => {
     return (
@@ -24,19 +21,16 @@ const App: React.FC = () => {
                     <Route path='/Dialogs'
                            render={() =>
                                <DialogsContainer
-                           />}/>
+                               />}/>
                     <Route path='/Profile/:userId?' render={() => <ProfileComponent
                     />}/>
                     <Route path='/Friends' render={() => <Friends
                     />}/>
-                   <Route path='/Users' render={() => <UsersComponent
+                    <Route path='/Users' render={() => <UsersComponent
                     />}/>
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Music' component={() => <Music/>}/>
                     <Route path='/Setting' component={() => <Setting/>}/>
-                    
-                        
-                    
                 </div>
             </div>
         </BrowserRouter>

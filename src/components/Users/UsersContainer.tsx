@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import {RootState} from '../../Redux/redux-store';
 import {Dispatch} from "redux";
 import {
-    followAC,
+    followAC, getUsersThunkCreator,
     ItemsType,
     setCurrentPageAC,
     setTotalCountAC,
@@ -31,6 +31,7 @@ type mapDispatchToPropsType = {
     setTotalCount: (totalCount: number) => void
     toggleIsFetchingAC: (isFetching: boolean) => void
     toggleFollowingProgress:(isFetching: boolean, userId: number) => void
+
 }
 
 export type usersPropsType = mapStateToPropsType & mapDispatchToPropsType
@@ -68,7 +69,7 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
         },
         toggleFollowingProgress:(isFetching: boolean, userId: number) => {
             dispatch(toggleFollowingProgressAC(isFetching, userId))
-        }
+        },
     }
 }
 

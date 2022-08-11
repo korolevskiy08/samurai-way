@@ -1,3 +1,7 @@
+import {userAPI} from "../api/api";
+import {ThunkAction} from "redux-thunk";
+import {RootState} from "./redux-store";
+
 export type PhotosType = {
     small: any
     large: any
@@ -126,4 +130,19 @@ export const toggleFollowingProgressAC = (isFetchingDisable: boolean, userId: nu
     return {
         type: "TOGGLE-FOLLOWING-PROGRESS", isFetchingDisable, userId
     } as const
+}
+
+
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: any) => {
+        dispatch(toggleIsFetchingAC(true))
+
+        userAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toggleIsFetchingAC(false))
+            dispatch(setUsersAC(data.items))
+            dispatch(setTotalCountAC(data.totalCount))
+        })
+    }
+
 }
