@@ -1,19 +1,17 @@
 import React from "react";
-
-import axios from "axios";
 import {connect} from "react-redux";
-import {RootState} from "../../Redux/redux-store";
-import {ProfileType, setUserProfileAC} from "../../Redux/profile-reducer";
-import {Dispatch} from "redux";
+import {AppDispatch, RootState} from "../../Redux/redux-store";
+import {getProfileThunkCreator, ProfileType} from "../../Redux/profile-reducer";
 import Profile from "./Profile";
-import {withRouter} from "react-router-dom";
+import {Redirect, withRouter} from "react-router-dom";
 
 type MapStateToPropsType = {
     profile: ProfileType | null
+    isAuth: boolean
 }
 
 type MapDispatchToPropsType = {
-    setUserProfile: (profile: ProfileType) => void
+    getProfile: (userId: number) => void
 }
 
 export type ProfilePropsType = MapDispatchToPropsType & MapStateToPropsType
@@ -21,21 +19,18 @@ export type ProfilePropsType = MapDispatchToPropsType & MapStateToPropsType
 export class ProfileContainer extends React.Component<any>{
 
     componentDidMount() {
+
         let userId = this.props.match.params.userId
 
-        if(!userId){
-            userId = 2
-        }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
-            this.props.setUserProfile(response.data)
-            console.log(response.data)
-        })
+        this.props.getProfile(Number(userId))
+
     }
 
     render() {
+        if (!this.props.isAuth) return <Redirect to={'login'} />
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile} />
+                <Profile profile={this.props.profile} />
             </div>
         )
     }
@@ -43,14 +38,15 @@ export class ProfileContainer extends React.Component<any>{
 
 let mapStateToProps = (state: RootState) => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        isAuth: state.auth.isAuth
     }
 }
 
-let mapDispatchToProps = (dispatch: Dispatch) => {
+let mapDispatchToProps = (dispatch: AppDispatch): MapDispatchToPropsType => {
     return {
-        setUserProfile: (profile: any) => {
-            dispatch(setUserProfileAC(profile))
+        getProfile: (userId: number) => {
+            dispatch(getProfileThunkCreator(userId))
         }
     }
 }

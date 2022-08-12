@@ -4,6 +4,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Button} from "../common/Button/Button";
 import {dialogsPropsType} from "./Dialogs.container";
+import {Redirect} from "react-router-dom";
 
 
 export let Dialogs = ({
@@ -11,12 +12,15 @@ export let Dialogs = ({
                           messagesData,
                           onChangeNewMessageText,
                           addMessage,
-                          dialogMessage
+                          dialogMessage,
+                          isAuth
                       }: dialogsPropsType) => {
     console.log(dialogMessage)
 
     let dialogsElement = dialogsData.map((el, i) => <DialogItem key={i} name={el.name} id={el.id}/>)
     let messagesElement = messagesData.map((el, i) => <Message key={i} text={el.message} id={el.id}/>)
+
+    if (!isAuth) return <Redirect to={'/login'}></Redirect>
 
     return (
         <div className={c.dialogs}>

@@ -1,14 +1,16 @@
+import {AppThunk} from "./redux-store";
+import {userAPI} from "../api/api";
+import {log} from "util";
+
 export type PostDataType = {
     id: number
     message: string
     like: number
 }
-
 type PhotosType = {
     large: string
     small: string
 }
-
 type ContactsType = {
     facebook: string | null
     github: string | null
@@ -19,7 +21,6 @@ type ContactsType = {
     website: string | null
     youtube: string | null
 }
-
 export type ProfileType = {
     aboutMe: string
     lookingForAJob: boolean
@@ -29,13 +30,11 @@ export type ProfileType = {
     PhotosType: PhotosType
     userId: number
 }
-
 export type ProfilePageType = {
     postData: Array<PostDataType>
     newPostText: string
     profile: ProfileType | null
 }
-
 let initialState:ProfilePageType = {
         postData: [
             { id: 1, message: 'Hi, how are you?', like: 6 },
@@ -74,7 +73,6 @@ const profileReducer = (state = initialState, action:ProfileActionType): Profile
                 ...state,
                 profile: action.profile
             }
-
     }
     return state
 }
@@ -93,6 +91,19 @@ export const setUserProfileAC = (profile: any) => {
     return {
         type: 'SET-USER-PROFILE', profile
     } as const
+}
+
+export const getProfileThunkCreator = (userId: number): AppThunk => {
+    return (dispatch) => {
+        if(!userId){
+            userId = 2
+        }
+        userAPI.getProfile(userId)
+            .then(response => {
+                dispatch(setUserProfileAC(response.data))
+                    console.log(response.data.id)
+            })
+    }
 }
 
 export default profileReducer

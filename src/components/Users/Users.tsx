@@ -3,8 +3,6 @@ import classes from "./Users.module.css";
 import userPhoto from "../../assets/UserImg.png";
 import {ItemsType} from "../../Redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-
 
 type UsersType = {
     totalUsersCount: number
@@ -13,9 +11,8 @@ type UsersType = {
     followingInProgress: Array<number>
     onPageChanged: (pageNumber: number) => void
     items: Array<ItemsType>
-    unFollow: (userID: number) => void
-    follow: (userID: number) => void
-    toggleFollowingProgress:(isFetching: boolean, userId: number) => void
+    unFollowThunk: (userId: number) => void
+    followThunk:(userId: number) => void
 }
 
 const Users = (props: UsersType) => {
@@ -64,34 +61,13 @@ const Users = (props: UsersType) => {
                 {
                     props.items.map((el: any) => {
                         const unFollowHandler = () => {
-                        props.toggleFollowingProgress(true, el.id)
-                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {
-                                withCredentials: true,
-                                headers: {
-                                    "API-KEY": "6a186eca-b950-4867-b1d4-cf6c7447fc05"
-                                }
-                            }).then(response => {
-                                if (response.data.resultCode === 0) {
-                                    props.unFollow(el.id)
-                                }
-                                props.toggleFollowingProgress(false, el.id)
-                            })
+                            props.unFollowThunk(el.id)
+                            console.log(el.id)
                         }
 
                         const followHandler = () => {
-                            props.toggleFollowingProgress(true, el.id)
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
-                                withCredentials: true,
-                                headers: {
-                                    "API-KEY": "6a186eca-b950-4867-b1d4-cf6c7447fc05"
-                                }
-                            }).then(response => {
-                                if (response.data.resultCode === 0) {
-                                    props.follow(el.id)
-                                }
-                                props.toggleFollowingProgress(false, el.id)
-                            })
-
+                           props.followThunk(el.id)
+                            console.log(el.id)
                         }
 
                         return (
@@ -107,9 +83,12 @@ const Users = (props: UsersType) => {
                                     </div>
                                     <div>
                                         {el.followed
-                                            ? <button disabled={props.followingInProgress.some((id:any) => id === el.id)} onClick={unFollowHandler}>Unfollow</button>
-                                            : <button disabled={props.followingInProgress.some((id:any) => id === el.id)} onClick={followHandler}>Follow</button>
-
+                                            ?
+                                            <button disabled={props.followingInProgress.some((id: any) => id === el.id)}
+                                                    onClick={unFollowHandler}>Unfollow</button>
+                                            :
+                                            <button disabled={props.followingInProgress.some((id: any) => id === el.id)}
+                                                    onClick={followHandler}>Follow</button>
                                         }
 
                                     </div>

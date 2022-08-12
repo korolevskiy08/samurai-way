@@ -1,6 +1,4 @@
 import axios from 'axios'
-import React from 'react'
-
 
 const instance = axios.create({
     withCredentials: true,
@@ -11,8 +9,20 @@ const instance = axios.create({
 })
 
 export const userAPI = {
-    getUsers:(currentPage: number, pageSize: number)=> {
+    getUsers: (currentPage: number, pageSize: number) => {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data)
+    },
+    follow(userID: number) {
+        return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userID}`)
+    },
+    unFollow(userID: number) {
+        return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userID}`)
+    },
+    getProfile: (userId: number) => {
+        return instance.get(`profile/${userId}`)
+    },
+    setUserData: () => {
+        return instance.get(`auth/me`)
     }
 }

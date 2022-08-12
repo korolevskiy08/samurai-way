@@ -131,16 +131,38 @@ export const toggleFollowingProgressAC = (isFetchingDisable: boolean, userId: nu
     } as const
 }
 
-
-
 export const getUsersThunkCreator = (currentPage: number, pageSize: number):AppThunk => {
     return (dispatch) => {
         dispatch(toggleIsFetchingAC(true))
-
         userAPI.getUsers(currentPage, pageSize).then(data => {
             dispatch(toggleIsFetchingAC(false))
             dispatch(setUsersAC(data.items))
             dispatch(setTotalCountAC(data.totalCount))
+            dispatch(setCurrentPageAC(currentPage))
         })
+    }
+}
+export const unFollowThunkCreator = (userId: number):AppThunk => {
+    return (dispatch) => {
+        dispatch(toggleFollowingProgressAC(true, userId))
+        userAPI.unFollow(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(unFollowAC(userId))
+                }
+                dispatch(toggleFollowingProgressAC(false, userId))
+            })
+    }
+}
+export const followThunkCreator = (userId: number):AppThunk => {
+    return (dispatch) => {
+        dispatch(toggleFollowingProgressAC(true, userId))
+        userAPI.follow(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(followAC(userId))
+                }
+                dispatch(toggleFollowingProgressAC(false, userId))
+            })
     }
 }

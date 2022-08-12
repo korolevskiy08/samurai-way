@@ -10,6 +10,7 @@ import DialogsContainer from "./components/Dialogs/Dialogs.container";
 import {UsersComponent} from './components/Users/UsersContainer';
 import {ProfileComponent} from "./components/Profile/ProfileConteiner";
 import HeaderContainer from './components/Header/HeaderContainer';
+import {Login} from "./components/Login/Login";
 
 const App: React.FC = () => {
     return (
@@ -31,6 +32,7 @@ const App: React.FC = () => {
                     <Route path='/News' render={() => <News/>}/>
                     <Route path='/Music' component={() => <Music/>}/>
                     <Route path='/Setting' component={() => <Setting/>}/>
+                    <Route path='/login' render={() => <Login/>}/>
                 </div>
             </div>
         </BrowserRouter>
