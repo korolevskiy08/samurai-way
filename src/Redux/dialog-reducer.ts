@@ -26,10 +26,10 @@ let initialState = {
     newMessageText: ''
 }
 
-type ActionType = ReturnType<typeof addMessageActionCreator>
+export type DialogsActionType = ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof setNewMessageTextAC>
 
-export const dialogReducer = (state = initialState, action: ActionType): DialogPageType => {
+export const dialogReducer = (state = initialState, action: DialogsActionType): DialogPageType => {
     switch (action.type) {
         case 'ADD_NEW_MESSAGE':
             let newMessage = {

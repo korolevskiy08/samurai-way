@@ -5,7 +5,7 @@ export type DataType = {
     isAuth: boolean
 }
 
-export type ActionAuth = ReturnType<typeof setUserDataAC>
+export type ActionAuthType = ReturnType<typeof setUserDataAC>
 
 let initialState:DataType = {
     userId: null,
@@ -14,7 +14,7 @@ let initialState:DataType = {
     isAuth: false
 }
 
-export const authReducer = (state = initialState, action: ActionAuth):DataType => {
+export const authReducer = (state = initialState, action: ActionAuthType):DataType => {
     switch(action.type) {
             case 'SET-USER-DATA':{
                 return {

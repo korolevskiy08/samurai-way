@@ -46,11 +46,11 @@ let initialState:ProfilePageType = {
     profile: null
 }
 
-type ActionType = ReturnType<typeof addPostActionCreator>
+export type ProfileActionType = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof setNewPostTextAC>
     | ReturnType<typeof setUserProfileAC>
 
-const profileReducer = (state = initialState, action:ActionType): ProfilePageType => {
+const profileReducer = (state = initialState, action:ProfileActionType): ProfilePageType => {
     switch (action.type) {
         case 'ADD_POST':
             let newPost = {

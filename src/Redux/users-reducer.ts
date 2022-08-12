@@ -1,6 +1,5 @@
 import {userAPI} from "../api/api";
-import {ThunkAction} from "redux-thunk";
-import {RootState} from "./redux-store";
+import {AppThunk} from "./redux-store";
 
 export type PhotosType = {
     small: any
@@ -33,7 +32,7 @@ let initialState:initialStateType = {
     followingInProgress: []
 }
 
-type ActionType = ReturnType<typeof followAC>
+export type UsersActionType = ReturnType<typeof followAC>
     | ReturnType<typeof unFollowAC>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setCurrentPageAC>
@@ -41,7 +40,7 @@ type ActionType = ReturnType<typeof followAC>
     | ReturnType<typeof toggleIsFetchingAC>
     | ReturnType<typeof toggleFollowingProgressAC>
 
-export const userReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
+export const userReducer = (state: initialStateType = initialState, action: UsersActionType): initialStateType => {
     switch (action.type) {
         case 'FOLLOW':
             return {
@@ -134,8 +133,8 @@ export const toggleFollowingProgressAC = (isFetchingDisable: boolean, userId: nu
 
 
 
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
-    return (dispatch: any) => {
+export const getUsersThunkCreator = (currentPage: number, pageSize: number):AppThunk => {
+    return (dispatch) => {
         dispatch(toggleIsFetchingAC(true))
 
         userAPI.getUsers(currentPage, pageSize).then(data => {
@@ -144,5 +143,4 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
             dispatch(setTotalCountAC(data.totalCount))
         })
     }
-
 }
