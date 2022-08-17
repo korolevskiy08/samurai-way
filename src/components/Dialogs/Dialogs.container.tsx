@@ -9,12 +9,15 @@ import {RootState} from "../../Redux/redux-store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import Dialogs from "./Dialogs";
+import {Redirect, withRouter} from "react-router-dom";
+import {ProfileContainer} from "../Profile/ProfileConteiner";
+import {withAuthRedirect} from "../../command/customHocRedirect/WithAuthRedirect";
+
 
 type mapStateToPropsType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
     dialogMessage: string
-    isAuth: boolean
 }
 type mapDispatchToPropsType = {
     addMessage: () => void
@@ -22,13 +25,11 @@ type mapDispatchToPropsType = {
 }
 export type dialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
-
 let mapStateToProps = (state: RootState): mapStateToPropsType => { // отвечает за пропсы значений
     return {
         dialogsData: state.dialogPage.dialogsData,
         messagesData: state.dialogPage.messagesData,
         dialogMessage: state.dialogPage.newMessageText,
-        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => { // отвечает за коллбэки
@@ -43,6 +44,6 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => { // о
     }
 }
 
-const MyDialogComponent = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+const MyDialogComponent = connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(Dialogs))
 
 export default MyDialogComponent

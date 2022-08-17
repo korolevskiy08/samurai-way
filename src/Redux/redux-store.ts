@@ -10,7 +10,7 @@ export type ActionsType = UsersActionType | DialogsActionType | ActionAuthType |
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, ActionsType>
 
-export let reducers = combineReducers({
+export let reducer = combineReducers({
     profilePage: profileReducer,
     dialogPage: dialogReducer,
     usersPage: userReducer,
@@ -18,8 +18,11 @@ export let reducers = combineReducers({
     auth: authReducer
 })
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware))
+let store = createStore(reducer, applyMiddleware(thunkMiddleware))
 
+
+type ReducersType = typeof reducer
+export type AppStateType = ReturnType<ReducersType>
 export type ReduxStoreType = typeof store
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = ThunkDispatch<RootState, unknown, ActionsType>//typeof store.dispatch

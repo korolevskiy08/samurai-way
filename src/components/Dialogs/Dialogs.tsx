@@ -13,14 +13,11 @@ export let Dialogs = ({
                           onChangeNewMessageText,
                           addMessage,
                           dialogMessage,
-                          isAuth
                       }: dialogsPropsType) => {
     console.log(dialogMessage)
 
     let dialogsElement = dialogsData.map((el, i) => <DialogItem key={i} name={el.name} id={el.id}/>)
     let messagesElement = messagesData.map((el, i) => <Message key={i} text={el.message} id={el.id}/>)
-
-    if (!isAuth) return <Redirect to={'/login'}></Redirect>
 
     return (
         <div className={c.dialogs}>
