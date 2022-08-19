@@ -1,11 +1,7 @@
-import React from "react";
+import React from 'react'
 
 let Music = () => {
-    return (
-        <div>
-            MUSIC
-        </div>
-    )
+  return <div>MUSIC</div>
 }
 
-export default Music;
+export default Music

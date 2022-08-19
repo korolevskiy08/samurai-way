@@ -1,15 +1,17 @@
-.contantContainer{
-    width: 650px;
-    display: flex;
-    justify-content: center;
+.contantContainer {
+  display: flex;
+  justify-content: center;
+
+  width: 650px;
 }
 
-.discription{
-    display: flex;
-   width: 500px;
-   justify-content: space-between;
+.discription {
+  display: flex;
+  justify-content: space-between;
+
+  width: 500px;
 }
 
-.selectedPage{
-    font-weight: bold;
+.selectedPage {
+  font-weight: bold;
 }

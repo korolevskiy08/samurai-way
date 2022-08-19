@@ -1,20 +1,23 @@
-.friends{
-    width: 1000px;
-    display: flex;
-    align-items: center;
+.friends {
+  display: flex;
+  align-items: center;
+
+  width: 1000px;
 }
 
-.avatarFriends{
-    padding: 10px 0 0 10px;
+.avatarFriends {
+  padding: 10px 0 0 10px;
 }
 
 .friends img {
-    width: 50px;
-    border-radius: 30px;
+  width: 50px;
+
+  border-radius: 30px;
 }
-.discription{
-    padding-left: 50px;
-    width: 800px;
-    display: flex;
-    justify-content: space-between;
+.discription {
+  display: flex;
+  justify-content: space-between;
+
+  width: 800px;
+  padding-left: 50px;
 }

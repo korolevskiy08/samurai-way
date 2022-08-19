@@ -1,17 +1,17 @@
-import React from "react";
-import c from'./Message.module.css';
+import React from 'react'
+import c from './Message.module.css'
 
 type MessagePropsType = {
-    text: string,
-    id: number
+  text: string
+  id: number
 }
 
 const Message = (props: MessagePropsType) => {
-    return(
-        <div>
-            <div className={c.message}>{props.text}</div>
-        </div>
-    )
+  return (
+    <div>
+      <div className={c.message}>{props.text}</div>
+    </div>
+  )
 }
 
-export default Message;
+export default Message

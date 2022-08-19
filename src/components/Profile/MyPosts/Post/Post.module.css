@@ -1,29 +1,33 @@
-.item{
-    display: flex;
+.item {
+  display: flex;
 }
 
-.item img{
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    align-items: center;
+.item img {
+  align-items: center;
+
+  width: 60px;
+  height: 60px;
+
+  border-radius: 50%;
 }
 
-.textPost{
-padding-left: 20px;
+.textPost {
+  padding-left: 20px;
 }
 
-.posts{
-    margin-left: 100px;
-    width: 800px;
-    background-color: #818c99;
+.posts {
+  width: 800px;
+  margin-left: 100px;
+
+  background-color: #818c99;
 }
 
-.post{
-    width: 1000px;
+.post {
+  width: 1000px;
 }
 
-.space{
-    height: 10px;
-    background-color: white;
+.space {
+  height: 10px;
+
+  background-color: white;
 }

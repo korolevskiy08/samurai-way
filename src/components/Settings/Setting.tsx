@@ -1,11 +1,7 @@
-import React from "react";
+import React from 'react'
 
 let Setting = () => {
-    return(
-        <div>
-            Setting
-        </div>
-    )
+  return <div>Setting</div>
 }
 
-export default Setting;
+export default Setting

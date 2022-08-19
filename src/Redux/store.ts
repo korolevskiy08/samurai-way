@@ -1,52 +1,53 @@
-import profileReducer, {addPostActionCreator} from "./profile-reducer";
-import dialogReducer, {addMessageActionCreator} from "./dialog-reducer";
-import sideBarReducer from "./sideBar-reducer";
-
+import profileReducer, { addPostActionCreator } from './profile-reducer'
+import dialogReducer, { addMessageActionCreator } from './dialog-reducer'
+import sideBarReducer from './sideBar-reducer'
 
 type PostDataType = {
-    id: number
-    message: string
-    like: number
+  id: number
+  message: string
+  like: number
 }
 type MessagesDataType = {
-    id: number
-    message: string
+  id: number
+  message: string
 }
 
 type DialogsDataType = {
-    id: number
-    name: string
+  id: number
+  name: string
 }
 export type ProfilePageType = {
-    postData: Array<PostDataType>
+  postData: Array<PostDataType>
 }
 
 export type DialogPageType = {
-    dialogsData: Array<DialogsDataType>
-    messagesData: Array<MessagesDataType>
+  dialogsData: Array<DialogsDataType>
+  messagesData: Array<MessagesDataType>
 }
 type FriendsType = {
-    id: number
-    name: string
-    status: string
+  id: number
+  name: string
+  status: string
 }
 export type SideBarType = {
-    friends: Array<FriendsType>
+  friends: Array<FriendsType>
 }
 export type RootStateType = {
-    profilePage: ProfilePageType
-    dialogPage: DialogPageType
-    sideBar: SideBarType
+  profilePage: ProfilePageType
+  dialogPage: DialogPageType
+  sideBar: SideBarType
 }
 
 export type StoreType = {
-    _state: RootStateType
-    _callSubscriber: () => void
-    getState: () => void
-    subscribe: (callback: () => void) => void
-    dispatch: (action: ActionsType) => void
+  _state: RootStateType
+  _callSubscriber: () => void
+  getState: () => void
+  subscribe: (callback: () => void) => void
+  dispatch: (action: ActionsType) => void
 } // типизация всего стора
-export type ActionsType = ReturnType<typeof addPostActionCreator> | ReturnType<typeof addMessageActionCreator>
+export type ActionsType =
+  | ReturnType<typeof addPostActionCreator>
+  | ReturnType<typeof addMessageActionCreator>
 // export let store: StoreType = {
 //     _state: {
 //         profilePage: {
@@ -94,7 +95,3 @@ export type ActionsType = ReturnType<typeof addPostActionCreator> | ReturnType<t
 //        this._callSubscriber()
 //     }
 // }
-
-
-
-

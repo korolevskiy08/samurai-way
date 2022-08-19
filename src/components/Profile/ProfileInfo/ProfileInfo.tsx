@@ -1,36 +1,51 @@
-import React from "react";
-import c from "./ProfileInfo.module.css";
-import {Preloader} from "../../common/Preloader/Preloader";
-import userPhoto from "../../../assets/UserImg.png";
+import React from 'react'
+import c from './ProfileInfo.module.css'
+import { Preloader } from '../../common/Preloader/Preloader'
+import userPhoto from '../../../assets/UserImg.png'
+import { ProfileType } from '../../../Redux/profile-reducer'
+import { ProfileInfoDescription } from './ProfileInfoDescription/ProfileInfoDescription'
 
-const ProfileInfo = (props: any) => {
-    console.log(props.profile)
-    if(!props.profile) {
-        return <Preloader />
-    }
-
-    return(
-        <div>
-            <div className={c.descriptionProfile}>
-                <div>
-                    <img className={c.avatar}
-                         src={props.profile.photos.large !== null ? props.profile.photos.large : userPhoto }/>
-                </div>
-                <div className={c.profileInfo}>
-                    <div className={c.description}>
-                        <h2>{`${props.profile.fullName}`}</h2>
-                        <h5>aboutMe: {props.profile.aboutMe !== null ? `${props.profile.aboutMe}` : '-'} </h5>
-
-                        <h5>looking for a job:
-                            {props.profile.lookingForAJob ? `${props.profile.lookingForAJob}`: '-'} </h5>
-
-                        <h5>looking for a job description: {props.profile.lookingForAJobDescription !== null ? `${props.profile.lookingForAJobDescription}` : '-'}</h5>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    )
+type ProfileInfoType = {
+  profile: ProfileType
 }
 
-export default ProfileInfo;
+const ProfileInfo = ({ profile }: ProfileInfoType) => {
+  console.log(profile)
+  if (!profile) {
+    return <Preloader />
+  }
+
+  return (
+    <div>
+      <div className={c.descriptionProfile}>
+        <div>
+          <img
+            alt="avatar"
+            className={c.avatar}
+            src={profile.photos.large !== null ? profile.photos.large : userPhoto}
+          />
+        </div>
+        <div className={c.profileInfo}>
+          <div className={c.description}>
+            <h2>{`${profile.fullName}`}</h2>
+            <h5>aboutMe: {profile.aboutMe !== null ? ` ${profile.aboutMe}` : '-'} </h5>
+            <ProfileInfoDescription />
+            <h5>
+              looking for a job:
+              {profile.lookingForAJob ? ` ${profile.lookingForAJob}` : '-'}
+            </h5>
+
+            <h5>
+              looking for a job description:
+              {profile.lookingForAJobDescription !== null
+                ? ` ${profile.lookingForAJobDescription}`
+                : '-'}
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default ProfileInfo

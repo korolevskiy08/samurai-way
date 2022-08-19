@@ -1,27 +1,29 @@
-.nav{
-    grid-area: n;
-    background-color: #edeef0;
-    margin-right: 5px;
+.nav {
+  grid-area: n;
+
+  margin-right: 5px;
+
+  background-color: #edeef0;
 }
-.item{
-    color: black;
-    padding: 5px 5px 5px 5px;
+.item {
+  padding: 5px 5px 5px 5px;
+
+  color: black;
 }
 
 .item a {
-    text-decoration: none;
-
+  text-decoration: none;
 }
 
-.item:hover{
-    background-color: #818c99;
+.item:hover {
+  background-color: #818c99;
 }
 
 .active {
-    color: black;
+  color: black;
 }
 
-.myPhotos{
-    margin-top: 10px;
-    width: 900px;
+.myPhotos {
+  width: 900px;
+  margin-top: 10px;
 }
