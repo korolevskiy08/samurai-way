@@ -3,14 +3,15 @@ import c from './ProfileInfo.module.css'
 import { Preloader } from '../../common/Preloader/Preloader'
 import userPhoto from '../../../assets/UserImg.png'
 import { ProfileType } from '../../../Redux/profile-reducer'
-import { ProfileInfoDescription } from './ProfileInfoDescription/ProfileInfoDescription'
+import { ProfileStatus } from './ProfileStatus/ProfileStatus'
 
 type ProfileInfoType = {
   profile: ProfileType
+  status: string
+  updateStatus: (status: string) => void
 }
 
-const ProfileInfo = ({ profile }: ProfileInfoType) => {
-  console.log(profile)
+const ProfileInfo = ({ profile, status, updateStatus }: ProfileInfoType) => {
   if (!profile) {
     return <Preloader />
   }
@@ -28,8 +29,8 @@ const ProfileInfo = ({ profile }: ProfileInfoType) => {
         <div className={c.profileInfo}>
           <div className={c.description}>
             <h2>{`${profile.fullName}`}</h2>
+            <ProfileStatus status={status} />
             <h5>aboutMe: {profile.aboutMe !== null ? ` ${profile.aboutMe}` : '-'} </h5>
-            <ProfileInfoDescription />
             <h5>
               looking for a job:
               {profile.lookingForAJob ? ` ${profile.lookingForAJob}` : '-'}

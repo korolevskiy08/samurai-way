@@ -1,5 +1,5 @@
 import { AppThunk } from './redux-store'
-import { userAPI } from '../api/api'
+import { profileAPI, userAPI } from '../api/api'
 export type PostDataType = {
   id: number
   message: string
@@ -32,6 +32,7 @@ export type ProfilePageType = {
   postData: Array<PostDataType>
   newPostText: string
   profile: ProfileType | null
+  status: string
 }
 let initialState: ProfilePageType = {
   postData: [
@@ -43,12 +44,14 @@ let initialState: ProfilePageType = {
   ],
   newPostText: '',
   profile: null,
+  status: '',
 }
 
 export type ProfileActionType =
   | ReturnType<typeof addPostActionCreator>
   | ReturnType<typeof setNewPostTextAC>
   | ReturnType<typeof setUserProfileAC>
+  | ReturnType<typeof setStatusAC>
 
 const profileReducer = (state = initialState, action: ProfileActionType): ProfilePageType => {
   switch (action.type) {
@@ -75,6 +78,11 @@ const profileReducer = (state = initialState, action: ProfileActionType): Profil
         ...state,
         profile: action.profile,
       }
+    case 'SET-STATUS':
+      return {
+        ...state,
+        status: action.status,
+      }
     default:
       return state
   }
@@ -98,14 +106,36 @@ export const setUserProfileAC = (profile: any) => {
   } as const
 }
 
+export const setStatusAC = (status: string) => {
+  return {
+    type: 'SET-STATUS',
+    status,
+  } as const
+}
+
+export const getStatusThunkCreator = (userId: number): AppThunk => {
+  return (dispatch) => {
+    profileAPI.getStatus(userId).then((response) => {
+      dispatch(setStatusAC(response.data))
+    })
+  }
+}
+
+export const updateStatusThunkCreator = (status: string): AppThunk => {
+  return (dispatch) => {
+    profileAPI.updateStatus(status).then((response) => {
+      if (response.data.resultCode === 0) dispatch(setStatusAC(status))
+    })
+  }
+}
+
 export const getProfileThunkCreator = (userId: number): AppThunk => {
   return (dispatch) => {
     if (!userId) {
       userId = 2
     }
-    userAPI.getProfile(userId).then((response) => {
+    profileAPI.getProfile(userId).then((response) => {
       dispatch(setUserProfileAC(response.data))
-      console.log(response.data.id)
     })
   }
 }
