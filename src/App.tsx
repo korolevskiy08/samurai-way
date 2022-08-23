@@ -23,10 +23,10 @@ const App: React.FC = () => {
           <Route path="/Profile/:userId?" render={() => <ProfileComponent />} />
           <Route path="/Friends" render={() => <Friends />} />
           <Route path="/Users" render={() => <UsersComponent />} />
-          <Route path="/News" render={() => <News />} />
-          <Route path="/Music" component={() => <Music />} />
-          <Route path="/Setting" component={() => <Setting />} />
-          <Route path="/Login" component={() => <Login />} />
+          <Route path="/News" render={News} />
+          <Route path="/Music" component={Music} />
+          <Route path="/Setting" component={Setting} />
+          <Route path="/Login" render={() => <Login />} />
         </div>
       </div>
     </BrowserRouter>

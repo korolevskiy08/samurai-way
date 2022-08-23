@@ -6,8 +6,13 @@ type ProfileStatusType = {
   updateStatus: (status: string) => void
 }
 
+type localStateType = {
+  editMode: boolean
+  status: string
+}
+
 export class ProfileStatus extends Component<ProfileStatusType> {
-  state = {
+  state: localStateType = {
     editMode: false,
     status: this.props.status,
   }
@@ -29,7 +34,8 @@ export class ProfileStatus extends Component<ProfileStatusType> {
     })
   }
 
-  componentDidUpdate(prevProps: any, prevState: any) {
+  componentDidUpdate(prevProps: ProfileStatusType, prevState: localStateType) {
+    console.log(prevState)
     if (prevProps.status !== this.props.status) {
       this.setState({
         status: this.state.status,

@@ -31,6 +31,7 @@ export class ProfileContainer extends React.Component<ProfilePropsType> {
   componentDidMount() {
     let userId = this.props.match.params.userId
     this.props.getProfile(Number(userId))
+
     this.props.getStatus(Number(userId))
   }
 
