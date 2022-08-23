@@ -29,7 +29,7 @@ const ProfileInfo = ({ profile, status, updateStatus }: ProfileInfoType) => {
         <div className={c.profileInfo}>
           <div className={c.description}>
             <h2>{`${profile.fullName}`}</h2>
-            <ProfileStatus status={status} />
+            <ProfileStatus status={status} updateStatus={updateStatus} />
             <h5>aboutMe: {profile.aboutMe !== null ? ` ${profile.aboutMe}` : '-'} </h5>
             <h5>
               looking for a job:
