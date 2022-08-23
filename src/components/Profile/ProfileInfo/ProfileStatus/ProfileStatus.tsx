@@ -28,6 +28,15 @@ export class ProfileStatus extends Component<ProfileStatusType> {
       status: e.currentTarget.value,
     })
   }
+
+  componentDidUpdate(prevProps: any, prevState: any) {
+    if (prevProps.status !== this.props.status) {
+      this.setState({
+        status: this.state.status,
+      })
+    }
+  }
+
   render() {
     return (
       <>
