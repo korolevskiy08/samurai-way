@@ -1,5 +1,7 @@
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import {FC, SyntheticEvent} from 'react'
+import {Input} from "../../command/FormControl/FormControl";
+import {required} from "../../command/utils/validators/validators";
 
 type FormDataType = {
   handleSubmit: (values: SyntheticEvent<HTMLFormElement>) => void
@@ -13,13 +15,13 @@ export const LoginForm: FC<InjectedFormProps<FormDataType>> = ({handleSubmit}) =
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <Field placeholder={'Login'} name={'login'} component={'input'} />
+        <Field placeholder={'Login'} name={'login'} component={Input} validate={[required]} />
       </div>
       <div>
-        <Field placeholder={'Password'} name={'password'} component={'input'} />
+        <Field placeholder={'Password'} name={'password'} component={Input} validate={[required]} />
       </div>
       <div>
-        <Field component={'input'} type={'checkbox'} name={'rememberMe'} /> Remember me
+        <Field component={Input} type={'checkbox'} name={'rememberMe'} /> Remember me
       </div>
       <div>
         <button type={'submit'}>Login</button>
