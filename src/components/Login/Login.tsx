@@ -7,7 +7,7 @@ import {AppDispatch, RootState} from "../../Redux/redux-store";
 import {ReqLoginType} from "../../api/api";
 import {loginTC} from "../../Redux/auth-reducer";
 import {Redirect} from "react-router-dom";
-
+import styles from './login.module.css'
 
 type FormDataType = {
     handleSubmit: (values: SyntheticEvent<HTMLFormElement>) => void
@@ -38,22 +38,23 @@ let mapDispatchToProps = (dispatch: AppDispatch): MapDispatchToPropsType => {
     }
 }
 
-const LoginForm: FC<InjectedFormProps<FormDataType>> = ({handleSubmit}) => {
+const LoginForm: FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-                <Field placeholder={'Login'} name={'login'} component={Input} validate={[required]}/>
+            <div className={styles.formContainer}>
+                <Field className={styles.field} placeholder={'Login'} name={'login'} component={Input}
+                       validate={[required]}/>
+                <Field className={styles.field} placeholder={'Password'} name={'password'} component={Input} validate={[required]}/>
+                <div className={styles.checkboxBlock}>
+                    <Field component={Input} type={'checkbox'} name={'rememberMe'}/> <span>Remember me</span>
+                </div>
+                {error && <div className={styles.error}>{error}</div>}
+                <div>
+                    <button className={styles.button} type={'submit'}>Login</button>
+                </div>
             </div>
-            <div>
-                <Field placeholder={'Password'} name={'password'} component={Input} validate={[required]}/>
-            </div>
-            <div>
-                <Field component={Input} type={'checkbox'} name={'rememberMe'}/> Remember me
-            </div>
-            <div>
-                <button type={'submit'}>Login</button>
-            </div>
+
         </form>
     )
 }

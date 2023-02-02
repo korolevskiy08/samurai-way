@@ -1,5 +1,6 @@
 import {AppThunk} from './redux-store'
 import {ReqLoginType, userAPI} from '../api/api'
+import {stopSubmit} from "redux-form";
 
 export type DataType = {
     userId: number | null
@@ -50,15 +51,16 @@ export const setUserDataThunkCreator = (): AppThunk => {
 }
 
 export const loginTC = (data: ReqLoginType): AppThunk => async dispatch => {
-    try {
-        const res = await userAPI.login(data)
-        if (res.data.resultCode === 0) {
-            dispatch(setUserDataThunkCreator())
-        }
-        console.log(res)
-    } catch (e) {
-
-    }
+    await userAPI.login(data)
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+                dispatch(setUserDataThunkCreator())
+            } else {
+                let message = res.data.message.length > 0 ? res.data.message[0] : 'some error'
+                // @ts-ignore
+                dispatch(stopSubmit("form", {_error: message}))
+            }
+        })
 }
 
 export const logout = (): AppThunk => async dispatch => {
