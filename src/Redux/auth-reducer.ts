@@ -1,5 +1,5 @@
 import { AppThunk } from './redux-store'
-import { userAPI } from '../api/api'
+import {ReqLoginType, userAPI} from '../api/api'
 
 export type DataType = {
   userId: number | null
@@ -46,5 +46,14 @@ export const setUserDataThunkCreator = (): AppThunk => {
         dispatch(setUserDataAC(id, email, login))
       }
     })
+  }
+}
+
+export const loginTC = (data: ReqLoginType): AppThunk => async dispatch => {
+  try {
+    const res = await userAPI.login(data)
+    console.log(res)
+  } catch (e) {
+
   }
 }

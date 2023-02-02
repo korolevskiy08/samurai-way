@@ -20,9 +20,12 @@ export const userAPI = {
   unFollow(userID: number) {
     return instance.delete(`follow/${userID}`)
   },
-  setUserData: () => {
+  setUserData() {
     return instance.get(`auth/me`)
   },
+  login(data: ReqLoginType) {
+    return instance.post('/auth/login', data)
+  }
 }
 
 export const profileAPI = {
@@ -37,4 +40,11 @@ export const profileAPI = {
       status,
     })
   },
+}
+
+export type ReqLoginType = {
+  email: string;
+  password: string;
+  rememberMe: boolean;
+  captcha: boolean;
 }

@@ -22,8 +22,6 @@ export let reducer = combineReducers({
 
 let store = createStore(reducer, applyMiddleware(thunkMiddleware))
 
-console.log(store)
-
 type ReducersType = typeof reducer
 export type AppStateType = ReturnType<ReducersType>
 export type ReduxStoreType = typeof store

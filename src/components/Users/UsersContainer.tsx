@@ -58,17 +58,19 @@ export class UsersContainer extends Component<usersPropsType> {
   render() {
     return (
       <>
-        {this.props.isFetching ? <Preloader /> : null}
-        <Users
-          totalUsersCount={this.props.totalUsersCount}
-          pageSize={this.props.pageSize}
-          currentPage={this.props.currentPage}
-          onPageChanged={this.onPageChanged}
-          items={this.props.items}
-          followingInProgress={this.props.followingInProgress}
-          unFollowThunk={this.props.unFollowThunk}
-          followThunk={this.props.followThunk}
-        />
+        {this.props.isFetching
+            ? <Preloader/>
+            : <Users
+                totalUsersCount={this.props.totalUsersCount}
+                pageSize={this.props.pageSize}
+                currentPage={this.props.currentPage}
+                onPageChanged={this.onPageChanged}
+                items={this.props.items}
+                followingInProgress={this.props.followingInProgress}
+                unFollowThunk={this.props.unFollowThunk}
+                followThunk={this.props.followThunk}
+            />
+        }
       </>
     )
   }

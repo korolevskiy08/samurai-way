@@ -35,7 +35,6 @@ export class ProfileStatus extends Component<ProfileStatusType> {
   }
 
   componentDidUpdate(prevProps: ProfileStatusType, prevState: localStateType) {
-    console.log(prevState)
     if (prevProps.status !== this.props.status) {
       this.setState({
         status: this.state.status,

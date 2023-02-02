@@ -1,5 +1,7 @@
 import { AppThunk } from './redux-store'
-import { profileAPI, userAPI } from '../api/api'
+import { profileAPI } from '../api/api'
+import {AddPostFormType} from "../components/Profile/MyPosts/AddPost/AddPost";
+
 export type PostDataType = {
   id: number
   message: string
@@ -49,29 +51,24 @@ let initialState: ProfilePageType = {
 
 export type ProfileActionType =
   | ReturnType<typeof addPostActionCreator>
-  | ReturnType<typeof setNewPostTextAC>
+  // | ReturnType<typeof setNewPostTextAC>
   | ReturnType<typeof setUserProfileAC>
   | ReturnType<typeof setStatusAC>
 
 const profileReducer = (state = initialState, action: ProfileActionType): ProfilePageType => {
   switch (action.type) {
     case 'ADD_POST':
+      console.log(action.textMessage)
       return {
         ...state,
         postData: [
           ...state.postData,
           {
             id: 0,
-            message: state.newPostText,
+            message: action.textMessage.newPostBody,
             like: 0,
           },
         ],
-        newPostText: '',
-      }
-    case 'NEW-POST-TEXT':
-      return {
-        ...state,
-        newPostText: action.newPostText,
       }
     case 'SET-USER-PROFILE':
       return {
@@ -88,17 +85,14 @@ const profileReducer = (state = initialState, action: ProfileActionType): Profil
   }
 }
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (textMessage: AddPostFormType) => {
+  console.log(textMessage)
   return {
     type: 'ADD_POST',
+    textMessage
   } as const
 }
-export const setNewPostTextAC = (text: string) => {
-  return {
-    type: 'NEW-POST-TEXT',
-    newPostText: text,
-  } as const
-}
+
 export const setUserProfileAC = (profile: any) => {
   return {
     type: 'SET-USER-PROFILE',

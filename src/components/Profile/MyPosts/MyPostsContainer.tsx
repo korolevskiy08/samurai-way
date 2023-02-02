@@ -1,13 +1,13 @@
-import React, { ChangeEvent, FC } from 'react'
+import React, { FC } from 'react'
 import {
   addPostActionCreator,
   PostDataType,
-  setNewPostTextAC,
 } from '../../../Redux/profile-reducer'
 import MyPosts from './MyPosts'
 import { connect } from 'react-redux'
 import { RootState } from '../../../Redux/redux-store'
 import { compose, Dispatch } from 'redux'
+import {AddPostFormType} from "./AddPost/AddPost";
 
 type mapStateToPropsType = {
   postData: Array<PostDataType>
@@ -15,8 +15,7 @@ type mapStateToPropsType = {
 }
 
 type mapDispatchToPropsType = {
-  addPostHandler: () => void
-  onChangeTextPost: (event: ChangeEvent<HTMLInputElement>) => void
+  addPostHandler: (textMessage: AddPostFormType) => void
 }
 
 export type profilePropsType = mapStateToPropsType & mapDispatchToPropsType
@@ -33,11 +32,9 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
   // отвечает за коллбэки
 
   return {
-    addPostHandler: () => {
-      dispatch(addPostActionCreator())
-    },
-    onChangeTextPost: (event: ChangeEvent<HTMLInputElement>) => {
-      dispatch(setNewPostTextAC(event.currentTarget.value))
+    addPostHandler: (textMessage: AddPostFormType) => {
+      console.log(textMessage)
+      dispatch(addPostActionCreator(textMessage))
     },
   }
 }
