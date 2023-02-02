@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { FC } from 'react'
 import { connect } from 'react-redux'
 import { compose, Dispatch } from 'redux'
-import { setUserDataThunkCreator } from '../../Redux/auth-reducer'
+import {logout, setUserDataThunkCreator} from '../../Redux/auth-reducer'
 import { AppDispatch, RootState } from '../../Redux/redux-store'
 import Header from './Header'
 
@@ -13,6 +13,7 @@ type MapStateToPropsType = {
 
 type MapDispatchToPropsType = {
   setUserDataThunk: () => void
+  logOut: () => void
 }
 
 export type HeaderComponentType = MapDispatchToPropsType & MapStateToPropsType
@@ -23,7 +24,7 @@ class HeaderContainer extends React.Component<HeaderComponentType> {
   }
 
   render() {
-    return <Header login={this.props.login} isAuth={this.props.isAuth} />
+    return <Header logOut={this.props.logOut} login={this.props.login} isAuth={this.props.isAuth} />
   }
 }
 
@@ -39,6 +40,9 @@ const mapDispatchToProps = (dispatch: AppDispatch): MapDispatchToPropsType => {
     setUserDataThunk: () => {
       dispatch(setUserDataThunkCreator())
     },
+    logOut: () => {
+      dispatch(logout())
+    }
   }
 }
 
