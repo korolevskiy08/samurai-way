@@ -56,9 +56,10 @@ export const loginTC = (data: ReqLoginType): AppThunk => async dispatch => {
             if (res.data.resultCode === 0) {
                 dispatch(setUserDataThunkCreator())
             } else {
-                let message = res.data.message.length > 0 ? res.data.message[0] : 'some error'
-                // @ts-ignore
-                dispatch(stopSubmit("form", {_error: message}))
+                if (res.data.resultCode !== 0) {
+                    let message = res.data.messages.length > 0 ? res.data.messages[0] : 'some error'
+                    dispatch(stopSubmit("login", {_error: message}))
+                }
             }
         })
 }

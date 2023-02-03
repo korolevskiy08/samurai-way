@@ -14,6 +14,7 @@ type FormDataType = {
     login: string
     password: string
     rememberMe: boolean
+    error: string
 }
 
 type MapDispatchToPropsType = {
@@ -39,7 +40,6 @@ let mapDispatchToProps = (dispatch: AppDispatch): MapDispatchToPropsType => {
 }
 
 const LoginForm: FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
-
     return (
         <form onSubmit={handleSubmit}>
             <div className={styles.formContainer}>
