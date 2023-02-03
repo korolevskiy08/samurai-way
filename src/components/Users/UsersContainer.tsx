@@ -1,38 +1,34 @@
-import { connect } from 'react-redux'
-import { AppDispatch, RootState } from '../../Redux/redux-store'
-import {
-  followAC,
-  followThunkCreator,
-  getUsersThunkCreator,
-  unFollowAC,
-  unFollowThunkCreator,
-} from '../../Redux/users-reducer'
-import { Component, FC } from 'react'
+import {connect} from 'react-redux'
+import {AppDispatch, RootState} from '../../Redux/redux-store'
+import {followAC, followThunkCreator, getUsersThunkCreator, unFollowThunkCreator,} from '../../Redux/users-reducer'
+import {Component, FC} from 'react'
 import Users from './Users'
-import { Preloader } from '../common/Preloader/Preloader'
-import { compose } from 'redux'
+import {Preloader} from '../common/Preloader/Preloader'
+import {compose} from 'redux'
+import {
+  getCurrentPage,
+  getFollowInProgress,
+  getIsFetching,
+  getItems,
+  getPageSize,
+  getTotalCount
+} from "../../Redux/users-selectors";
 
 export type usersPropsType = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    items: state.usersPage.items,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
-    followingInProgress: state.usersPage.followingInProgress,
-  }
-}
+const mapStateToProps = (state: RootState) => ({
+    items: getItems(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    followingInProgress: getFollowInProgress(state),
+})
 
-const mapDispatchToProps = (dispatch: AppDispatch) => {
-  return {
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
     follow: (userID: number) => {
       dispatch(followAC(userID))
-    },
-    unFollow: (userID: number) => {
-      dispatch(unFollowAC(userID))
     },
     getUsers: (currentPage: number, pageSize: number) => {
       dispatch(getUsersThunkCreator(currentPage, pageSize))
@@ -43,8 +39,7 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
     followThunk: (userId: number) => {
       dispatch(followThunkCreator(userId))
     },
-  }
-}
+})
 
 export class UsersContainer extends Component<usersPropsType> {
   componentDidMount() {
