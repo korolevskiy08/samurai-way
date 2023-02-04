@@ -5,7 +5,6 @@ import ProfileInfo from './ProfileInfo/ProfileInfo'
 import MyPostsComponent from './MyPosts/MyPostsContainer'
 
 const Profile = ({ profile, status, updateStatus }: any) => {
-    console.log('Render profile')
   return (
     <div>
       <ProfileInfo profile={profile} status={status} updateStatus={updateStatus} />

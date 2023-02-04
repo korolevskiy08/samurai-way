@@ -11,7 +11,6 @@ import {AddPostFormType} from "./AddPost/AddPost";
 
 type mapStateToPropsType = {
   postData: Array<PostDataType>
-  value: string
 }
 
 type mapDispatchToPropsType = {
@@ -24,7 +23,6 @@ let mapStateToProps = (state: RootState): mapStateToPropsType => {
   // отвечает за пропсы значений
   return {
     postData: state.profilePage.postData,
-    value: state.profilePage.newPostText,
   }
 }
 

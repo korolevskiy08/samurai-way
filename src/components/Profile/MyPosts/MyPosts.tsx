@@ -7,7 +7,6 @@ import React from "react";
 export const MyPosts = (props: profilePropsType) => {
 
     let {addPostHandler, postData} = props;
-    console.log('My posts render')
 
     const postElements = postData.map((el, i) => {
         return <Post key={i} message={el.message} like={el.like}/>

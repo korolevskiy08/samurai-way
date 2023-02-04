@@ -1,6 +1,7 @@
 import {AppThunk} from './redux-store'
 import {profileAPI} from '../api/api'
 import {AddPostFormType} from "../components/Profile/MyPosts/AddPost/AddPost";
+import axios from "axios";
 
 export type PostDataType = {
     id: number
@@ -116,31 +117,39 @@ export const deletePost = (postId: number) => {
     } as const
 }
 
-export const getStatusThunkCreator = (userId: number): AppThunk => {
-    return (dispatch) => {
-        profileAPI.getStatus(userId).then((response) => {
-            dispatch(setStatusAC(response.data))
-        })
+export const getStatusThunkCreator = (userId: number): AppThunk => async (dispatch) => {
+    try {
+        const response = await profileAPI.getStatus(userId)
+        dispatch(setStatusAC(response.data))
+    } catch (e) {
+        if (axios.isAxiosError(e)) {
+        }
     }
 }
 
-export const updateStatusThunkCreator = (status: string): AppThunk => {
-    return (dispatch) => {
-        profileAPI.updateStatus(status).then((response) => {
-            if (response.data.resultCode === 0) dispatch(setStatusAC(status))
-        })
+export const updateStatusThunkCreator = (status: string): AppThunk => async (dispatch) => {
+    try {
+        const response = await profileAPI.updateStatus(status)
+
+        if (response.data.resultCode === 0) dispatch(setStatusAC(status))
+    } catch (e) {
+        if (axios.isAxiosError(e)) {
+        }
     }
 }
 
-export const getProfileThunkCreator = (userId: number): AppThunk => {
-    return (dispatch) => {
+export const getProfileThunkCreator = (userId: number): AppThunk => async (dispatch) => {
+    try {
         if (!userId) {
             userId = 2
         }
-        profileAPI.getProfile(userId).then((response) => {
-            dispatch(setUserProfileAC(response.data))
-        })
+        const response = await profileAPI.getProfile(userId)
+        dispatch(setUserProfileAC(response.data))
+    } catch (e) {
+        if (axios.isAxiosError(e)) {
+        }
     }
+
 }
 
 export default profileReducer

@@ -1,6 +1,6 @@
 import {Field, InjectedFormProps, reduxForm} from 'redux-form'
 import {FC, SyntheticEvent} from 'react'
-import {Input} from "../../command/FormControl/FormControl";
+import {createField, Input} from "../../command/FormControl/FormControl";
 import {required} from "../../command/utils/validators/validators";
 import {connect} from "react-redux";
 import {AppDispatch, RootState} from "../../Redux/redux-store";
@@ -43,18 +43,14 @@ const LoginForm: FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) =
     return (
         <form onSubmit={handleSubmit}>
             <div className={styles.formContainer}>
-                <Field className={styles.field} placeholder={'Login'} name={'login'} component={Input}
-                       validate={[required]}/>
-                <Field className={styles.field} placeholder={'Password'} name={'password'} component={Input} validate={[required]}/>
+                {createField(styles.field, 'Login', 'Login', Input, [required])}
+                {createField(styles.field, 'Password', 'password', Input, [required])}
                 <div className={styles.checkboxBlock}>
                     <Field component={Input} type={'checkbox'} name={'rememberMe'}/> <span>Remember me</span>
                 </div>
                 {error && <div className={styles.error}>{error}</div>}
-                <div>
                     <button className={styles.button} type={'submit'}>Login</button>
-                </div>
             </div>
-
         </form>
     )
 }

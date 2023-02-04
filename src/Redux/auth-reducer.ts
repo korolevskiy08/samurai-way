@@ -1,6 +1,7 @@
 import {AppThunk} from './redux-store'
 import {ReqLoginType, userAPI} from '../api/api'
 import {stopSubmit} from "redux-form";
+import axios from "axios";
 
 export type DataType = {
     userId: number | null
@@ -39,29 +40,36 @@ export const setUserDataAC = (userId: number | null, email: string | null, login
     } as const
 }
 
-export const setUserDataThunkCreator = (): AppThunk => {
-    return (dispatch) => {
-        userAPI.setUserData().then((response) => {
-            if (response.data.resultCode === 0) {
-                let {id, email, login} = response.data.data
-                dispatch(setUserDataAC(id, email, login, true))
-            }
-        })
+export const setUserDataThunkCreator = (): AppThunk => async dispatch => {
+    try {
+        const response = await userAPI.setUserData()
+
+        if (response.data.resultCode === 0) {
+            let {id, email, login} = response.data.data
+            dispatch(setUserDataAC(id, email, login, true))
+        }
+    } catch (e) {
+        if (axios.isAxiosError(e)) {
+        }
     }
 }
 
 export const loginTC = (data: ReqLoginType): AppThunk => async dispatch => {
-    await userAPI.login(data)
-        .then((res) => {
-            if (res.data.resultCode === 0) {
-                dispatch(setUserDataThunkCreator())
-            } else {
-                if (res.data.resultCode !== 0) {
-                    let message = res.data.messages.length > 0 ? res.data.messages[0] : 'some error'
-                    dispatch(stopSubmit("login", {_error: message}))
-                }
+    try {
+        const res = await userAPI.login(data)
+
+        if (res.data.resultCode === 0) {
+            dispatch(setUserDataThunkCreator())
+        } else {
+            if (res.data.resultCode !== 0) {
+                let message = res.data.messages.length > 0 ? res.data.messages[0] : 'some error'
+                dispatch(stopSubmit("login", {_error: message}))
             }
-        })
+        }
+    } catch (e) {
+        if (axios.isAxiosError(e)) {
+        }
+    }
 }
 
 export const logout = (): AppThunk => async dispatch => {
@@ -71,6 +79,6 @@ export const logout = (): AppThunk => async dispatch => {
             dispatch(setUserDataAC(null, null, null, false))
         }
     } catch (e) {
-
+        if (axios.isAxiosError(e)) {}
     }
 }
