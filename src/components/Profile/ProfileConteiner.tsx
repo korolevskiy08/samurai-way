@@ -11,7 +11,6 @@ import Profile from './Profile'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { withAuthRedirect } from '../../command/customHocRedirect/WithAuthRedirect'
 import { compose } from 'redux'
-import ProfileWithHooks from "./ProfileWithHooks";
 
 export type MapStateToPropsProfileContainerType = {
   profile: ProfileType;
@@ -44,7 +43,7 @@ export class ProfileContainer extends React.Component<ProfilePropsType> {
   render() {
     return (
       <div>
-        <ProfileWithHooks
+        <Profile
           profile={this.props.profile}
           status={this.props.status}
           updateStatus={this.props.updateStatus}

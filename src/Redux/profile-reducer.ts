@@ -58,7 +58,6 @@ export type ProfileActionType =
 const profileReducer = (state = initialState, action: ProfileActionType): ProfilePageType => {
   switch (action.type) {
     case 'ADD_POST':
-      console.log(action.textMessage)
       return {
         ...state,
         postData: [
@@ -86,7 +85,6 @@ const profileReducer = (state = initialState, action: ProfileActionType): Profil
 }
 
 export const addPostActionCreator = (textMessage: AddPostFormType) => {
-  console.log(textMessage)
   return {
     type: 'ADD_POST',
     textMessage

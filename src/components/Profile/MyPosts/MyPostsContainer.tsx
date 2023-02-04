@@ -33,7 +33,6 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
 
   return {
     addPostHandler: (textMessage: AddPostFormType) => {
-      console.log(textMessage)
       dispatch(addPostActionCreator(textMessage))
     },
   }
