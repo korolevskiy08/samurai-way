@@ -1,4 +1,4 @@
-import React, {memo} from 'react'
+import React from 'react'
 import c from './Profile.module.css'
 import Post from './MyPosts/Post/Post'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
