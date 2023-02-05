@@ -26,7 +26,7 @@ export type initialStateType = {
 
 let initialState: initialStateType = {
     items: [],
-    pageSize: 7,
+    pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
