@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 import './App.css'
 import Navbar from './components/Navbar/Navbar'
-import {Route, withRouter} from 'react-router-dom'
+import {BrowserRouter, Route, withRouter} from 'react-router-dom'
 import Music from './components/Music/Music'
 import News from './components/News/News'
 import Setting from './components/Settings/Setting'
@@ -12,8 +12,8 @@ import {ProfileComponent} from './components/Profile/ProfileConteiner'
 import HeaderContainer from './components/Header/HeaderContainer'
 import {LoginContainer} from './components/Login/Login'
 import {compose} from "redux";
-import {connect} from "react-redux";
-import {AppDispatch, RootState} from "./Redux/redux-store";
+import {connect, Provider} from "react-redux";
+import store, {AppDispatch, RootState} from "./Redux/redux-store";
 import {initializeApp} from "./Redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
 
@@ -33,24 +33,24 @@ class App extends React.Component<AppType> {
     }
 
     render() {
-        if(!this.props.initialized) {
-            return <Preloader />
+        if (!this.props.initialized) {
+            return <Preloader/>
         }
         return (
-                <div className="app-wrapper">
-                    <HeaderContainer/>
-                    <Navbar/>
-                    <div className="app-wrapper-content">
-                        <Route path="/Dialogs" render={() => <DialogsContainer/>}/>
-                        <Route path="/Profile/:userId?" render={() => <ProfileComponent/>}/>
-                        <Route path="/Friends" render={() => <Friends/>}/>
-                        <Route path="/Users" render={() => <UsersComponent/>}/>
-                        <Route path="/News" render={News}/>
-                        <Route path="/Music" component={Music}/>
-                        <Route path="/Setting" component={Setting}/>
-                        <Route path="/Login" render={() => <LoginContainer/>}/>
-                    </div>
+            <div className="app-wrapper">
+                <HeaderContainer/>
+                <Navbar/>
+                <div className="app-wrapper-content">
+                    <Route path="/Dialogs" render={() => <DialogsContainer/>}/>
+                    <Route path="/Profile/:userId?" render={() => <ProfileComponent/>}/>
+                    <Route path="/Friends" render={() => <Friends/>}/>
+                    <Route path="/Users" render={() => <UsersComponent/>}/>
+                    <Route path="/News" render={News}/>
+                    <Route path="/Music" component={Music}/>
+                    <Route path="/Setting" component={Setting}/>
+                    <Route path="/Login" render={() => <LoginContainer/>}/>
                 </div>
+            </div>
         )
     }
 }
@@ -65,4 +65,16 @@ const mapStateToProps = (state: RootState): MapStateToPropsType => ({
     initialized: state.app.initialized
 })
 
-export default compose<FC>(connect(mapStateToProps, mapDispatchToProps), withRouter)(App)
+const AppContainer = compose<FC>(connect(mapStateToProps, mapDispatchToProps), withRouter)(App)
+
+const SamurajJSApp = () => {
+    return(
+        <Provider store={store}>
+            <BrowserRouter>
+                <AppContainer />
+            </BrowserRouter>
+        </Provider>
+    )
+}
+
+export default SamurajJSApp
