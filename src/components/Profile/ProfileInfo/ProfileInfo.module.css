@@ -1,7 +1,18 @@
+.avatarBlock {
+  display: flex;
+  flex-direction: column;
+
+  width: 185px;
+}
+
 .avatar {
   width: 180px;
   height: 180px;
   padding: 10px 0 0 10px;
+}
+
+.addImage {
+  margin: 10px;
 }
 
 .descriptionProfile {
@@ -10,4 +21,13 @@
 
 .profileInfo {
   padding-left: 40px;
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  align-items: flex-end;
+  padding: 10px 70px;
 }

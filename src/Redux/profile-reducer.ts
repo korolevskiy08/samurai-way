@@ -13,22 +13,21 @@ type PhotosType = {
     large: string
     small: string
 }
-type ContactsType = {
-    facebook: string | null
-    github: string | null
-    instagram: string | null
-    mainLink: string | null
-    twitter: string | null
-    vk: string | null
-    website: string | null
-    youtube: string | null
-}
 export type ProfileType = {
     aboutMe: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
-    contacts: ContactsType
+    contacts: {
+        facebook: string | null
+        github: string | null
+        instagram: string | null
+        mainLink: string | null
+        twitter: string | null
+        vk: string | null
+        website: string | null
+        youtube: string | null
+    }
     photos: any
     userId: number
 }

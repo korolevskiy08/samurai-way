@@ -4,6 +4,7 @@ import { Preloader } from '../../common/Preloader/Preloader'
 import userPhoto from '../../../assets/UserImg.png'
 import { ProfileType } from '../../../Redux/profile-reducer'
 import { ProfileStatus } from './ProfileStatus/ProfileStatus'
+import {Contacts} from "../Contacts/Contacts";
 
 type ProfileInfoType = {
   profile: ProfileType
@@ -25,15 +26,14 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }: Prof
   }
 
   return (
-    <div>
       <div className={c.descriptionProfile}>
-        <div>
+        <div className={c.avatarBlock}>
           <img
             alt="avatar"
             className={c.avatar}
             src={profile.photos.large !== null ? profile.photos.large : userPhoto}
           />
-          {isOwner && <input type="file" onChange={mainPhotoSelected} />}
+          {isOwner && <input className={c.addImage} type="file" onChange={mainPhotoSelected} />}
         </div>
         <div className={c.profileInfo}>
           <div className={c.description}>
@@ -52,8 +52,13 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }: Prof
             </h5>
           </div>
         </div>
+        <div className={c.contacts}>
+          {Object.keys(profile.contacts).map(key => {
+            {Object.values(profile.contacts).map(el => <Contacts contactValue={el} />)}
+            return <Contacts key={key} contactName={key} />
+          })}
+        </div>
       </div>
-    </div>
   )
 }
 
