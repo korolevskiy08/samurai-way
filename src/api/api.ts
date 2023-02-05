@@ -24,7 +24,7 @@ export const userAPI = {
     return instance.get(`auth/me`)
   },
   login(data: ReqLoginType) {
-    return instance.post('/auth/login', {email: data.email, password: data.password, rememberMe: data.rememberMe})
+    return instance.post('/auth/login', data)
   },
   logout() {
     return instance.delete('/auth/login')
@@ -49,5 +49,4 @@ export type ReqLoginType = {
   email: string;
   password: string;
   rememberMe: boolean;
-  captcha: boolean;
 }

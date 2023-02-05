@@ -35,7 +35,6 @@ const ProfileInfo = ({ profile, status, updateStatus }: ProfileInfoType) => {
               looking for a job:
               {profile.lookingForAJob ? ` ${profile.lookingForAJob}` : '-'}
             </h5>
-
             <h5>
               looking for a job description:
               {profile.lookingForAJobDescription !== null

@@ -43,7 +43,7 @@ const LoginForm: FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) =
     return (
         <form onSubmit={handleSubmit}>
             <div className={styles.formContainer}>
-                {createField(styles.field, 'Login', 'Login', Input, [required])}
+                {createField(styles.field, 'Login', 'login', Input, [required])}
                 {createField(styles.field, 'Password', 'password', Input, [required])}
                 <div className={styles.checkboxBlock}>
                     <Field component={Input} type={'checkbox'} name={'rememberMe'}/> <span>Remember me</span>
@@ -64,7 +64,8 @@ type LoginPropsType = {
 
 export const Login: FC<LoginPropsType> = ({login, isAuth}) => {
     const onSubmit = (formData: FormDataType) => {
-        login({email: formData.login, rememberMe: true, password: formData.password, captcha: true})
+        login({email: formData.login, password: formData.password, rememberMe: true })
+        console.log({email: formData.login, password: formData.password, rememberMe: true })
     }
 
 

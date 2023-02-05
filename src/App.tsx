@@ -16,7 +16,7 @@ import {connect, Provider} from "react-redux";
 import store, {AppDispatch, RootState} from "./Redux/redux-store";
 import {initializeApp} from "./Redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
-import {withSuspense} from "./command/withSuspense/withSuspense";
+
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/Dialogs.container'));
 const ProfileComponent = React.lazy(() => import('./components/Profile/ProfileConteiner'));
