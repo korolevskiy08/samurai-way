@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {ChangeEvent} from 'react'
 import c from './ProfileInfo.module.css'
 import { Preloader } from '../../common/Preloader/Preloader'
 import userPhoto from '../../../assets/UserImg.png'
@@ -9,11 +9,19 @@ type ProfileInfoType = {
   profile: ProfileType
   status: string
   updateStatus: (status: string) => void
+  isOwner: boolean
+  savePhoto: any
 }
 
-const ProfileInfo = ({ profile, status, updateStatus }: ProfileInfoType) => {
+const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto }: ProfileInfoType) => {
   if (!profile) {
     return <Preloader />
+  }
+
+  const mainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+    if(e.target.files) {
+      savePhoto(e.target.files[0])
+    }
   }
 
   return (
@@ -25,6 +33,7 @@ const ProfileInfo = ({ profile, status, updateStatus }: ProfileInfoType) => {
             className={c.avatar}
             src={profile.photos.large !== null ? profile.photos.large : userPhoto}
           />
+          {isOwner && <input type="file" onChange={mainPhotoSelected} />}
         </div>
         <div className={c.profileInfo}>
           <div className={c.description}>

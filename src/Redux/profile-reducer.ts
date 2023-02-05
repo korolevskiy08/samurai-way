@@ -2,6 +2,7 @@ import {AppThunk} from './redux-store'
 import {profileAPI} from '../api/api'
 import {AddPostFormType} from "../components/Profile/MyPosts/AddPost/AddPost";
 import axios from "axios";
+import profile from "../components/Profile/Profile";
 
 export type PostDataType = {
     id: number
@@ -28,12 +29,13 @@ export type ProfileType = {
     lookingForAJobDescription: string
     fullName: string
     contacts: ContactsType
-    photos: PhotosType
+    photos: any
     userId: number
 }
+
 export type ProfilePageType = {
     postData: Array<PostDataType>
-    profile: ProfileType | null
+    profile: any
     status: string
 }
 let initialState: ProfilePageType = {
@@ -54,6 +56,7 @@ export type ProfileActionType =
     | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof setStatusAC>
     | ReturnType<typeof deletePost>
+    | ReturnType<typeof savePhotoSuccess>
 
 const profileReducer = (state = initialState, action: ProfileActionType): ProfilePageType => {
     switch (action.type) {
@@ -84,6 +87,8 @@ const profileReducer = (state = initialState, action: ProfileActionType): Profil
                 ...state,
                 postData: state.postData.filter(el => el.id !== action.postId)
             }
+        case 'SAVE-PHOTO-SUCCESS' :
+            return { ...state, profile: { ...state.profile, photos: action.photos }}
         default:
             return state
     }
@@ -114,6 +119,13 @@ export const deletePost = (postId: number) => {
     return {
         type: 'DELETE-POST',
         postId
+    } as const
+}
+
+export const savePhotoSuccess = (photos: any) => {
+    return {
+        type: 'SAVE-PHOTO-SUCCESS',
+        photos
     } as const
 }
 
@@ -149,7 +161,17 @@ export const getProfileThunkCreator = (userId: number): AppThunk => async (dispa
         if (axios.isAxiosError(e)) {
         }
     }
+}
 
+export const saveProfilePhoto = (photos: any): AppThunk => async (dispatch) => {
+    try {
+        const response = await profileAPI.savePhoto(photos)
+
+        if (response.data.resultCode === 0) dispatch(savePhotoSuccess(response.data.data.photos))
+    } catch (e) {
+        if (axios.isAxiosError(e)) {
+        }
+    }
 }
 
 export default profileReducer

@@ -4,7 +4,7 @@ import {AppDispatch, RootState} from '../../Redux/redux-store'
 import {
     getProfileThunkCreator,
     getStatusThunkCreator,
-    ProfileType,
+    ProfileType, saveProfilePhoto,
     updateStatusThunkCreator,
 } from '../../Redux/profile-reducer'
 import Profile from './Profile'
@@ -23,6 +23,7 @@ type MapDispatchToPropsType = {
     getProfile: (userId: number) => void
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
+    savePhoto: (photo: any) => void
 }
 
 export type ProfilePropsType = MapDispatchToPropsType &
@@ -55,6 +56,8 @@ export class ProfileContainer extends React.Component<ProfilePropsType> {
         return (
             <div>
                 <Profile
+                    savePhoto={this.props.savePhoto}
+                    isOwner={!this.props.match.params.userId}
                     profile={this.props.profile}
                     status={this.props.status}
                     updateStatus={this.props.updateStatus}
@@ -84,6 +87,9 @@ let mapDispatchToProps = (dispatch: AppDispatch): MapDispatchToPropsType => {
         updateStatus: (status: string) => {
             dispatch(updateStatusThunkCreator(status))
         },
+        savePhoto: (photo: any) => {
+            dispatch((saveProfilePhoto(photo)))
+        }
     }
 }
 
