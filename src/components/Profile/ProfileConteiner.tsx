@@ -76,8 +76,10 @@ let mapDispatchToProps = (dispatch: AppDispatch): MapDispatchToPropsType => {
   }
 }
 
-export const ProfileComponent = compose<FC>(
+const ProfileComponent = compose<FC>(
   withAuthRedirect,
   connect(mapStateToProps, mapDispatchToProps),
   withRouter
 )(ProfileContainer)
+
+export default ProfileComponent

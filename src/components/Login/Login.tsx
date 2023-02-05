@@ -81,4 +81,6 @@ export const Login: FC<LoginPropsType> = ({login, isAuth}) => {
 }
 
 
-export const LoginContainer = connect(mapStateToProps, mapDispatchToProps)(Login)
+const LoginContainer = connect(mapStateToProps, mapDispatchToProps)(Login)
+
+export default LoginContainer

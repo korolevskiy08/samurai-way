@@ -6,16 +6,20 @@ import Music from './components/Music/Music'
 import News from './components/News/News'
 import Setting from './components/Settings/Setting'
 import Friends from './components/Friends/Friends'
-import DialogsContainer from './components/Dialogs/Dialogs.container'
+// import DialogsContainer from './components/Dialogs/Dialogs.container'
 import {UsersComponent} from './components/Users/UsersContainer'
-import {ProfileComponent} from './components/Profile/ProfileConteiner'
+// import {ProfileComponent} from './components/Profile/ProfileConteiner'
 import HeaderContainer from './components/Header/HeaderContainer'
-import {LoginContainer} from './components/Login/Login'
+import LoginContainer from './components/Login/Login'
 import {compose} from "redux";
 import {connect, Provider} from "react-redux";
 import store, {AppDispatch, RootState} from "./Redux/redux-store";
 import {initializeApp} from "./Redux/app-reducer";
 import {Preloader} from "./components/common/Preloader/Preloader";
+import {withSuspense} from "./command/withSuspense/withSuspense";
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/Dialogs.container'));
+const ProfileComponent = React.lazy(() => import('./components/Profile/ProfileConteiner'));
 
 type MapDispatchToPropsType = {
     initializeAppThunk: () => void
@@ -41,40 +45,52 @@ class App extends React.Component<AppType> {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-                    <Route path="/Dialogs" render={() => <DialogsContainer/>}/>
-                    <Route path="/Profile/:userId?" render={() => <ProfileComponent/>}/>
+                    <Route path="/Dialogs" render={() => {
+                        return <React.Suspense fallback={<div>..loading</div>}>
+                            <DialogsContainer/>
+                        </React.Suspense>
+                    }}/>
+                    <Route path="/Profile/:userId?" render={() => {
+                        return <React.Suspense fallback={<div>..loading</div>}>
+                            <ProfileComponent/>
+                        </React.Suspense>
+                    }}/>
+                    <Route path="/Login" render={() => <LoginContainer/>}/>
                     <Route path="/Friends" render={() => <Friends/>}/>
                     <Route path="/Users" render={() => <UsersComponent/>}/>
                     <Route path="/News" render={News}/>
                     <Route path="/Music" component={Music}/>
                     <Route path="/Setting" component={Setting}/>
-                    <Route path="/Login" render={() => <LoginContainer/>}/>
                 </div>
             </div>
         )
     }
 }
 
-const mapDispatchToProps = (dispatch: AppDispatch): MapDispatchToPropsType => ({
-    initializeAppThunk: () => {
-        dispatch(initializeApp())
-    },
-})
+const
+    mapDispatchToProps = (dispatch: AppDispatch): MapDispatchToPropsType => ({
+        initializeAppThunk: () => {
+            dispatch(initializeApp())
+        },
+    })
 
-const mapStateToProps = (state: RootState): MapStateToPropsType => ({
-    initialized: state.app.initialized
-})
+const
+    mapStateToProps = (state: RootState): MapStateToPropsType => ({
+        initialized: state.app.initialized
+    })
 
-const AppContainer = compose<FC>(connect(mapStateToProps, mapDispatchToProps), withRouter)(App)
+const
+    AppContainer = compose<FC>(connect(mapStateToProps, mapDispatchToProps), withRouter)(App)
 
-const SamurajJSApp = () => {
-    return(
-        <Provider store={store}>
-            <BrowserRouter>
-                <AppContainer />
-            </BrowserRouter>
-        </Provider>
-    )
-}
+const
+    SamurajJSApp = () => {
+        return (
+            <Provider store={store}>
+                <BrowserRouter>
+                    <AppContainer/>
+                </BrowserRouter>
+            </Provider>
+        )
+    }
 
 export default SamurajJSApp
