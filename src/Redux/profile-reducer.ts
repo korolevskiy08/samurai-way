@@ -168,8 +168,24 @@ export const saveProfilePhoto = (photos: any): AppThunk => async (dispatch) => {
 
         if (response.data.resultCode === 0) dispatch(savePhotoSuccess(response.data.data.photos))
     } catch (e) {
-        if (axios.isAxiosError(e)) {
+        if (axios.isAxiosError(e)) {}
+    }
+}
+
+export const saveDataProfile = (data: any): AppThunk => async (dispatch, getState) => {
+    const userId = getState().auth.userId
+
+    try {
+        const response = await profileAPI.saveProfile(data)
+
+        if (response.data.resultCode === 0) {
+            dispatch(savePhotoSuccess(response.data.data.photos))
+            if(userId) {
+                dispatch(getProfileThunkCreator(userId))
+            }
         }
+    } catch (e) {
+        if (axios.isAxiosError(e)) {}
     }
 }
 

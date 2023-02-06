@@ -10,12 +10,13 @@ type ProfileType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: any
+    saveData: any
 }
 
-const Profile: FC<ProfileType> = ({ profile, status, updateStatus, isOwner, savePhoto }) => {
+const Profile: FC<ProfileType> = ({ profile, status, updateStatus, isOwner, savePhoto, saveData }) => {
   return (
     <div>
-      <ProfileInfo profile={profile} status={status} updateStatus={updateStatus} isOwner={isOwner} savePhoto={savePhoto} />
+      <ProfileInfo profile={profile} status={status} updateStatus={updateStatus} isOwner={isOwner} savePhoto={savePhoto} saveData={saveData} />
       <div className={c.space}></div>
       <MyPostsComponent />
       <Post />

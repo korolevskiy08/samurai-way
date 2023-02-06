@@ -14,16 +14,19 @@ export const FormControl = ({meta, children}: any) => {
 };
 
 
-
 export const Input = ({input, ...props}: any) => {
-return <FormControl {...props}>{<input {...input} {...props} />}</FormControl>
+    return <FormControl {...props}>{<input {...input} {...props} />}</FormControl>
+};
+
+export const TextArea = ({textarea, ...props}: any) => {
+    return <FormControl {...props}>{<textarea {...textarea} {...props} />}</FormControl>
 };
 
 export const createField =
-    (className: string, placeholder: string, name: string, component: ReactNode, required: any) => {
+    (className: string, placeholder: string, name: string, component: ReactNode, required: any, type: string) => {
     return (
-        <div>
-            <Field className={className} placeholder={placeholder} name={name} component={component} validate={required} />
+        <div style={{display: 'flex'}}>
+            <Field className={className} placeholder={placeholder} name={name} component={component} validate={required} type={type} />
         </div>
     )
 }
